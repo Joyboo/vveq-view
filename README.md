@@ -1,6 +1,6 @@
 # blog-view
 
-> A Vue.js project
+> 使用Vue+webpack+Element搭建博客平台
 
 ## Build Setup
 
