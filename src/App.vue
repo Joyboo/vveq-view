@@ -7,7 +7,7 @@
             <!--导航栏主题-->
             <el-col :xs="24" :sm="24" :md="24" :lg="4" :xl="4" style="text-align: center;line-height: 45px;">
               <!--移动端菜单按钮-->
-              <span style="float: left;" class="hidden-md-and-down">
+              <span style="float: left;">
                 <el-dropdown>
                 <span class="el-dropdown-link">
                   <i class="el-icon-menu" @click="m_closesearchdialog"></i>
@@ -22,9 +22,9 @@
 
               <span style="color: #F56C6C;">Joy</span>boo
               <!--移动端搜索/关闭搜索按钮-->
-              <span style="float: right;" @click="m_ctlselectdialog" class="hidden-md-and-down"><i :class="m_ctlsearchicon"></i></span>
+              <span style="float: right;" @click="m_ctlselectdialog"><i :class="m_ctlsearchicon"></i></span>
             </el-col>
-            <!--移动端隐藏-->
+            <!--pc端搜索框-->
             <el-col class="hidden-md-and-down" :lg="16" :xl="16">
               <el-input placeholder="请输入内容" v-model="input23" style="height: 45px;">
                 <i slot="prefix" class="el-input__icon el-icon-search"></i>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-  import '../static/css/display.css'
+  import './assets/css/display.css'
 
   export default {
     data() {
