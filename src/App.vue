@@ -1,75 +1,38 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header style="height: 45px;">
-        <div style="width: 100%;margin: 0 auto;">
-          <el-row :gutter="10">
-            <!--导航栏主题-->
-            <el-col :xs="24" :sm="24" :md="24" :lg="4" :xl="4" style="text-align: center;line-height: 45px;">
-              <!--移动端菜单按钮-->
-              <span style="float: left;">
-                <el-dropdown>
-                <span class="el-dropdown-link">
-                  <i class="el-icon-menu" @click="m_closesearchdialog"></i>
-                </span>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>技术文章1</el-dropdown-item>
-                  <el-dropdown-item>技术文章2</el-dropdown-item>
-                  <el-dropdown-item divided>我要登录</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-              </span>
-
-              <span style="color: #F56C6C;">Joy</span>boo
-              <!--移动端搜索/关闭搜索按钮-->
-              <span style="float: right;" @click="m_ctlselectdialog"><i :class="m_ctlsearchicon"></i></span>
-            </el-col>
-            <!--pc端搜索框-->
-            <el-col class="hidden-md-and-down" :lg="16" :xl="16">
-              <el-input placeholder="请输入内容" v-model="input23" style="height: 45px;">
-                <i slot="prefix" class="el-input__icon el-icon-search"></i>
-              </el-input>
-            </el-col>
-            <!--pc显示具体项,移动端隐藏-->
-            <el-col :lg="4" :xl="4" class="hidden-md-and-down">
-              <div style="float: right;width: 450px;">
-                <ul class="head-ul hidden-sm-only hidden-xs-only">
-                  <li style="float: right;padding: 0 5px;">
-                    <el-button type="text">登录</el-button>
-                  </li>
-                  <li style="float: right; padding: 0 5px;">
-                    <el-button type="text"><i class="el-icon-edit">写文章</i></el-button>
-                  </li>
-                  <li style="float: right; padding: 0 5px;">
-                    <el-input placeholder="请输入内容" v-model="input23" style="height: 45px;">
-                      <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                    </el-input>
-                  </li>
-                </ul>
-              </div>
-            </el-col>
-          </el-row>
+      <el-header style="height: 40px;">
+        <div class="public-container">
+          <div style="float: left;">
+            <span style="color: #F56C6C;">Joy</span><span style="color: #409EFF;">boo</span>
+          </div>
+          <div class="hidden-md-and-down head-search">
+            <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
+          </div>
+          <div style="float: right;">
+              <ul style="list-style: none;margin: 0;">
+                <li>
+                  <a href="javascript:;">首页</a>
+                </li>
+                <li>
+                  <a href="javascript:;">登录</a>
+                </li>
+                <li>
+                  <a href="javascript:;">注册</a>
+                </li>
+              </ul>
+          </div>
         </div>
       </el-header>
-      <!--移动端搜索框-->
-      <div v-show="m_showselectsearch" style="width: 100%;height: 80px;background-color: white;">
-        <div style="margin-top: 15px;padding: 0 10px;">
-          <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
-            <el-button slot="append" icon="el-icon-search"></el-button>
-          </el-input>
-        </div>
-      </div>
+
       <el-container>
-        <div style="width: 100%;margin: 0 auto;">
+        <div class="public-container">
           <el-row :gutter="10">
-            <el-col :lg="4" :xl="4" class="hidden-md-and-down">
-              <div class="grid-content bg-purple"></div>
+            <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
+              <div style="border: 1px solid black;"></div>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
-              <div class="grid-content bg-purple-light"></div>
-            </el-col>
-            <el-col :lg="4" :xl="4" class="hidden-md-and-down">
-              <div class="grid-content bg-purple-light"></div>
+            <el-col :lg="6" :xl="6" class="hidden-md-and-down">
+              <div style="border: 1px solid red;"></div>
             </el-col>
           </el-row>
         </div>
@@ -80,31 +43,17 @@
 
 <script>
   import './assets/css/display.css'
+  import './assets/css/App.css'
 
   export default {
     data() {
       return {
         input4: '',
         input5: '',
-        input23: '',
-        m_showselectsearch: false, // 是否显示主页搜索框（移动端）
+        input9: '',
       }
     },
     methods: {
-      // 控制移动端搜索框显示/关闭
-      m_ctlselectdialog () {
-        this.m_showselectsearch = !this.m_showselectsearch
-      },
-      // 关闭移动端搜索dialog
-      m_closesearchdialog () {
-        this.m_showselectsearch = false
-      }
-    },
-    computed: {
-      // 移动端：计算属性返回不同的class，控制右上角显示搜索/关闭按钮
-      m_ctlsearchicon () {
-        return this.m_showselectsearch ? "el-icon-close" : "el-icon-search"
-      }
     }
   }
 </script>
@@ -112,21 +61,11 @@
 <style>
   body {
     margin: 0;
-    background-color: #f6f6f6;
+    background-color: #E2E2E2;
   }
 
-  /* 网站标题 */
-  #h1-container {
+  * {
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  }
-
-  /* head右侧菜单项 */
-  .head-ul {
-    position: relative;
-    list-style: none;
-    font-size: 14px;
-    margin: 0;
-    padding: 0;
   }
 
   .el-header, .el-footer {
@@ -134,7 +73,7 @@
     text-align: center;
     line-height: 45px;
     border-bottom: 1px solid #f6f6f6;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 5px 5px rgba(0, 0, 0, 0.075);
   }
 
   .head-container {
