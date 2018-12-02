@@ -35,9 +35,9 @@
               <div class="father-blog-item">
                 <!--第一个div显示节点-->
                 <div class="blog-item-head">
-                  <div class="blog-cate blo-cate-active">全部</div>
-                  <div class="blog-cate">最新</div>
-                  <div class="blog-cate" v-for="(nv, nk) of nodedata" :key="nk">{{nv}}</div>
+                  <span class="blog-cate blo-cate-active">全部</span>
+                  <span class="blog-cate">最新</span>
+                  <span class="blog-cate" v-for="(nv, nk) of nodedata" :key="nk">{{nv}}</span>
                 </div>
 
                 <!--父级div-->
@@ -55,7 +55,7 @@
                       <td width="10"></td>
                       <!--帖子td-->
                       <td width="auto">
-                        <div style="height: 50px;">
+                        <div style="min-height: 50px;">
                           <!--标题-->
                           <div class="item-title">
                             <a href="javascript:;">{{value.title}}</a>
@@ -131,7 +131,7 @@
           },
           1:{
             authorimg: "https://static.studygolang.com/avatar/gopher08.png?imageView2/2/w/48",
-            title: "golang是世界上最好的语言",
+            title: "golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言",
             tagid: 0,
             nodeid: 3,
             name: "Joyboo",

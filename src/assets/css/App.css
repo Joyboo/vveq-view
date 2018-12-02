@@ -1,5 +1,41 @@
 /* 公共 */
 
+.el-header, .el-footer {
+  background-color: white;
+  text-align: center;
+  line-height: 45px;
+  border-bottom: 1px solid #f6f6f6;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 5px 5px rgba(0, 0, 0, 0.075);
+}
+
+.head-container {
+  margin: 0 auto;
+  width: 83%;
+}
+
+.public-saide {
+  border: 1px solid #eaeaea;
+}
+
+.el-aside {
+  background-color: white;
+  text-align: center;
+  margin: 7px;
+}
+
+.el-main {
+  background-color: white;
+  text-align: center;
+  line-height: 1000px;
+  margin: 7px;
+  border: 1px solid #eaeaea;
+}
+
+.el-container {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
 .head-item {
   list-style: none;
   margin: 0;
@@ -36,21 +72,18 @@
 }
 
 .father-blog-item {
-  height: 500px;
   background-color: #FFF;
 }
 
 .blog-item-head {
   width: auto;
-  height: 25px;
+  line-height: 25px;
   margin: 0;
   padding: 5px;
-  line-height: 100%;
   border-bottom: 1px solid #e2e2e2;
 }
 
 .blog-cate {
-  float: left;
   margin: 5px;
   padding: 5px;
   font-size: 10px;
@@ -118,6 +151,9 @@
   font-size: 15px;
   color: #778087;
   padding: 0 3px 3px;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
 }
 
 /*回复数量tag标签*/
@@ -139,10 +175,9 @@
 
 /* 移动端 */
 @media only screen and (max-width: 1199px) {
-  .public-container {
+  .public-container:not(.public-container-head) {
     width: 100%;
-    height: 40px;
-    line-height: 40px;
+    min-height: 40px;
     margin: 0 auto;
   }
 
