@@ -10,20 +10,14 @@
             <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
           </div>
           <div style="float: right;">
-              <ul style="list-style: none;margin: 0;">
-                <li class="hidden-lg-and-up">
-                  <a herf="javascript:;" @click="m_showsearch" :class="m_searchicon"></a>
-                </li>
-                <li>
-                  <a href="javascript:;">首页</a>
-                </li>
-                <li>
-                  <a href="javascript:;">登录</a>
-                </li>
-                <li>
-                  <a href="javascript:;">注册</a>
-                </li>
-              </ul>
+            <ul class="head-item">
+              <li class="hidden-lg-and-up">
+                <a herf="javascript:;" @click="m_showsearch" :class="m_searchicon"></a>
+              </li>
+              <li><a href="javascript:;">首页</a></li>
+              <li><a href="javascript:;">登录</a></li>
+              <li><a href="javascript:;">注册</a></li>
+            </ul>
           </div>
         </div>
       </el-header>
@@ -33,6 +27,7 @@
           <el-row :gutter="10">
             <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
 
+              <!--移动端搜索框-->
               <div v-show="m_isshowsearch" class="m-seatch hidden-lg-and-up">
                 <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
               </div>
@@ -42,14 +37,56 @@
                 <div class="blog-item-head">
                   <div class="blog-cate blo-cate-active">全部</div>
                   <div class="blog-cate">最新</div>
-                  <div class="blog-cate">技术</div>
-                  <div class="blog-cate">源码展示</div>
+                  <div class="blog-cate" v-for="(nv, nk) of nodedata" :key="nk">{{nv}}</div>
                 </div>
-                <div class="blog-item"></div>
-                <div class="blog-item"></div>
-                <div class="blog-item"></div>
+
+                <!--父级div-->
+                <div class="blog-item" v-for="(value, k) of itemdata" :key="k">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tbody>
+                    <tr>
+                      <!--头像td-->
+                      <td width="48" valign="top" align="center">
+                        <a href="javascript:;">
+                          <img :src="value.authorimg" class="avatar" width="48px" height="48">
+                        </a>
+                      </td>
+
+                      <td width="10"></td>
+                      <!--帖子td-->
+                      <td width="auto">
+                        <div style="height: 50px;">
+                          <!--标题-->
+                          <div class="item-title">
+                            <a href="javascript:;">{{value.title}}</a>
+                          </div>
+                          <!--节点和发布者，标签, 发布时间 todo 换成XX天小时前这种格式-->
+                          <div class="item-other">
+                              <span v-if="!(value.tagid == 0)">
+                                <span class="item-tags" v-text="getTagName(value.tagid)"></span> &nbsp;•&nbsp;
+                              </span>
+                              <a class="item-node" href="javascript:;" v-text="getItemNodeName(value.nodeid)"></a> &nbsp;•&nbsp;
+                              <b><a class="item-author" href="javascript:;">{{value.name}}</a></b> &nbsp;•&nbsp;
+                              <span>{{value.updateTime}}</span>
+                          </div>
+                        </div>
+                      </td>
+
+                      <!--数量提示-->
+                      <td width="50" align="center">
+                        <a href="javascript:;">
+                          <el-badge class="mark" type="info" :value="value.commentNum" />
+                        </a>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+
               </div>
             </el-col>
+
+            <!--右侧边栏-->
             <el-col :lg="6" :xl="6" class="hidden-md-and-down">
               <div style="border: 1px solid red;height: 500px; "></div>
             </el-col>
@@ -70,16 +107,64 @@
         input4: '',
         input5: '',
         input9: '',
-        m_isshowsearch: false
+        m_isshowsearch: false,
+        nodedata: {
+          1:"技术",
+          2:"源码展示",
+          3:"分享",
+          4:"心情"
+        },
+        tagsdata: {
+          1: "置顶",
+          2: "独家",
+          3: "首发"
+        },
+        itemdata: {
+          0:{
+            authorimg: "https://static.studygolang.com/avatar/d395fa5d4a97a9e99a3a7b1a2e73c34c.png?imageView2/2/w/48",
+            title: "golang是世界上最好的语言",
+            tagid: 1,
+            nodeid: 1,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 16
+          },
+          1:{
+            authorimg: "https://static.studygolang.com/avatar/gopher08.png?imageView2/2/w/48",
+            title: "golang是世界上最好的语言",
+            tagid: 0,
+            nodeid: 3,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 17000
+          },
+          2:{
+            authorimg: "https://static.studygolang.com/avatar/7eac50527e3ce87c84fe80c639aff59d.jpg?imageView2/2/w/48",
+            title: "golang是世界上最好的语言",
+            tagid: 3,
+            nodeid: 2,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 0
+          }
+        }
       }
     },
     methods: {
-      m_showsearch () {
+      m_showsearch() {
         this.m_isshowsearch = !this.m_isshowsearch
+      },
+      getTagName(tagid) {
+        let tagname = this.tagsdata[tagid];
+        return typeof(tagname) == 'undefined' ? "" : tagname;
+      },
+      getItemNodeName(nodeid) {
+        let nodename = this.nodedata[nodeid];
+        return typeof(nodename) == 'undefined' ? "" : nodename;
       }
     },
     computed: {
-      m_searchicon () {
+      m_searchicon() {
         return this.m_isshowsearch ? "el-icon-close" : "el-icon-search"
       }
     }
@@ -94,6 +179,11 @@
 
   * {
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #556;
+    text-decoration: none;
   }
 
   .el-header, .el-footer {
