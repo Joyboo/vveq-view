@@ -11,6 +11,9 @@
           </div>
           <div style="float: right;">
               <ul style="list-style: none;margin: 0;">
+                <li class="hidden-lg-and-up">
+                  <a herf="javascript:;" @click="m_showsearch" :class="m_searchicon"></a>
+                </li>
                 <li>
                   <a href="javascript:;">首页</a>
                 </li>
@@ -25,14 +28,30 @@
         </div>
       </el-header>
 
-      <el-container>
+      <el-container style="margin-top: 10px;">
         <div class="public-container">
           <el-row :gutter="10">
             <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
-              <div style="border: 1px solid black;"></div>
+
+              <div v-show="m_isshowsearch" class="m-seatch hidden-lg-and-up">
+                <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
+              </div>
+
+              <div class="father-blog-item">
+                <!--第一个div显示节点-->
+                <div class="blog-item-head">
+                  <div class="blog-cate blo-cate-active">全部</div>
+                  <div class="blog-cate">最新</div>
+                  <div class="blog-cate">技术</div>
+                  <div class="blog-cate">源码展示</div>
+                </div>
+                <div class="blog-item"></div>
+                <div class="blog-item"></div>
+                <div class="blog-item"></div>
+              </div>
             </el-col>
             <el-col :lg="6" :xl="6" class="hidden-md-and-down">
-              <div style="border: 1px solid red;"></div>
+              <div style="border: 1px solid red;height: 500px; "></div>
             </el-col>
           </el-row>
         </div>
@@ -51,9 +70,18 @@
         input4: '',
         input5: '',
         input9: '',
+        m_isshowsearch: false
       }
     },
     methods: {
+      m_showsearch () {
+        this.m_isshowsearch = !this.m_isshowsearch
+      }
+    },
+    computed: {
+      m_searchicon () {
+        return this.m_isshowsearch ? "el-icon-close" : "el-icon-search"
+      }
     }
   }
 </script>
