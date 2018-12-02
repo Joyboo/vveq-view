@@ -1,6 +1,18 @@
+/***********************************************************************
+ *
+ * @description 重写Element响应式的显示
+ * @author Joyboo
+ * @lastupdatetime 2018-12-01 23:40
+ *
+***********************************************************************/
+
 @media only screen and (max-width: 767px) {
   .hidden-xs-only {
     display: none !important
+  }
+
+  .show-xs-only {
+    display: block !important
   }
 }
 
@@ -8,11 +20,19 @@
   .hidden-sm-and-up {
     display: none !important
   }
+
+  .show-sm-and-up {
+    display: block !important
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .hidden-sm-only {
     display: none !important
+  }
+
+  .show-sm-only {
+    display: block !important
   }
 }
 
@@ -20,11 +40,19 @@
   .hidden-sm-and-down {
     display: none !important
   }
+
+  .show-sm-and-down {
+    display: block !important
+  }
 }
 
 @media only screen and (min-width: 992px) {
   .hidden-md-and-up {
     display: none !important
+  }
+
+  .show-md-and-up {
+    display: block !important
   }
 }
 
@@ -32,11 +60,19 @@
   .hidden-md-only {
     display: none !important
   }
+
+  .show-md-only {
+    display: block !important
+  }
 }
 
 @media only screen and (max-width: 1199px) {
   .hidden-md-and-down {
     display: none !important
+  }
+
+  .show-md-and-down {
+    display: block !important
   }
 }
 
@@ -44,11 +80,19 @@
   .hidden-lg-and-up {
     display: none !important
   }
+
+  .show-lg-and-up {
+    display: block !important
+  }
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1919px) {
   .hidden-lg-only {
     display: none !important
+  }
+
+  .show-lg-only {
+    display: block !important
   }
 }
 
@@ -56,84 +100,17 @@
   .hidden-lg-and-down {
     display: none !important
   }
-}
 
-@media only screen and (min-width: 1920px) {
-  .hidden-xl-only {
-    display: none !important
-  }
-}
-
-/***********************************************************************/
-/**
- * @description 重写Element响应式的显示
- * @author Joyboo
- * @date 2018-12-01 23:40
- */
-/***********************************************************************/
-
-
-@media only screen and (max-width: 767px) {
-  .show-xs-only {
-    display: block !important
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .show-sm-and-up {
-    display: block !important
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .show-sm-only {
-    display: block !important
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  .show-sm-and-down {
-    display: block !important
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .show-md-and-up {
-    display: block !important
-  }
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .show-md-only {
-    display: block !important
-  }
-}
-
-@media only screen and (max-width: 1199px) {
-  .show-md-and-down {
-    display: block !important
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .show-lg-and-up {
-    display: block !important
-  }
-}
-
-@media only screen and (min-width: 1200px) and (max-width: 1919px) {
-  .show-lg-only {
-    display: block !important
-  }
-}
-
-@media only screen and (max-width: 1919px) {
   .show-lg-and-down {
     display: block !important
   }
 }
 
 @media only screen and (min-width: 1920px) {
+  .hidden-xl-only {
+    display: none !important
+  }
+
   .show-xl-only {
     display: block !important
   }
