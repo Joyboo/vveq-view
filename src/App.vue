@@ -16,7 +16,6 @@
               </li>
               <li><a href="javascript:;">首页</a></li>
               <li><a href="javascript:;">登录</a></li>
-              <li><a href="javascript:;">注册</a></li>
             </ul>
           </div>
         </div>
@@ -40,7 +39,7 @@
                   <span class="blog-cate" v-for="(nv, nk) of nodedata" :key="nk">{{nv}}</span>
                 </div>
 
-                <!--父级div-->
+                <!--帖子父级div-->
                 <div class="blog-item" v-for="(value, k) of itemdata" :key="k">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%">
                     <tbody>
@@ -88,7 +87,20 @@
 
             <!--右侧边栏-->
             <el-col :lg="6" :xl="6" class="hidden-md-and-down">
-              <div style="border: 1px solid red;height: 500px; "></div>
+              <div style="border: 1px solid red;">
+
+                <!--个人信息-->
+                <div class="right-user-box hidden-md-and-down">
+                  <!--头像+昵称-->
+                  <div style="border: 1px solid black;padding: 10px;height: 60px;background-color: #FFF;">
+                    <img src="https://avatars1.githubusercontent.com/u/35485279?s=460&v=4" width="60" height="60" style="border-radius: 50%;" alt="">
+                    <span ></span>
+                  </div>
+
+                  <!--发帖-->
+                </div>
+
+              </div>
             </el-col>
           </el-row>
         </div>
@@ -136,7 +148,7 @@
             nodeid: 3,
             name: "Joyboo",
             updateTime: "2018-12-02 18:03",
-            commentNum: 17000
+            commentNum: 1700
           },
           2:{
             authorimg: "https://static.studygolang.com/avatar/7eac50527e3ce87c84fe80c639aff59d.jpg?imageView2/2/w/48",

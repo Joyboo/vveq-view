@@ -148,7 +148,7 @@
 /*文章标题*/
 .item-title {
   line-height: 25px;
-  font-size: 15px;
+  font-size: 13px;
   color: #778087;
   padding: 0 3px 3px;
   text-overflow:ellipsis;
@@ -183,10 +183,14 @@
 
   .m-seatch {
     width: auto;
-    height: 43px;
+    line-height: 50px;
     margin: 0 0 10px;
     padding: 0 10px;
     background-color: #fff;
+  }
+
+  .item-title {
+    font-size: 15px;
   }
 }
 
