@@ -1,36 +1,18 @@
 <template>
   <div id="app">
     <el-container>
+
+      <!--头部-->
       <el-header style="height: 40px;">
-        <div class="public-container">
-          <div style="float: left;">
-            <span style="color: #F56C6C;">Joy</span><span style="color: #409EFF;">boo</span>
-          </div>
-          <div class="hidden-md-and-down head-search">
-            <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
-          </div>
-          <div style="float: right;">
-            <ul class="head-item">
-              <li class="hidden-lg-and-up">
-                <a herf="javascript:;" @click="m_showsearch" :class="m_searchicon"></a>
-              </li>
-              <li><a href="javascript:;">首页</a></li>
-              <li><a href="javascript:;">登录</a></li>
-            </ul>
-          </div>
-        </div>
+        <layouthead></layouthead>
       </el-header>
 
       <el-container style="margin-top: 10px;">
         <div class="public-container">
           <el-row :gutter="10">
+
+            <!--body-->
             <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
-
-              <!--移动端搜索框-->
-              <div v-show="m_isshowsearch" class="m-seatch hidden-lg-and-up">
-                <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
-              </div>
-
               <div class="father-blog-item">
                 <!--第一个div显示节点-->
                 <div class="blog-item-head">
@@ -64,9 +46,9 @@
                               <span v-if="!(value.tagid == 0)">
                                 <span class="item-tags" v-text="getTagName(value.tagid)"></span> &nbsp;•&nbsp;
                               </span>
-                              <a class="item-node" href="javascript:;" v-text="getItemNodeName(value.nodeid)"></a> &nbsp;•&nbsp;
-                              <b><a class="item-author" href="javascript:;">{{value.name}}</a></b> &nbsp;•&nbsp;
-                              <span>{{value.updateTime}}</span>
+                            <a class="item-node" href="javascript:;" v-text="getItemNodeName(value.nodeid)"></a> &nbsp;•&nbsp;
+                            <b><a class="item-author" href="javascript:;">{{value.name}}</a></b> &nbsp;•&nbsp;
+                            <span>{{value.updateTime}}</span>
                           </div>
                         </div>
                       </td>
@@ -87,21 +69,9 @@
 
             <!--右侧边栏-->
             <el-col :lg="6" :xl="6" class="hidden-md-and-down">
-              <div style="border: 1px solid red;">
-
-                <!--个人信息-->
-                <div class="right-user-box hidden-md-and-down">
-                  <!--头像+昵称-->
-                  <div style="border: 1px solid black;padding: 10px;height: 60px;background-color: #FFF;">
-                    <img src="https://avatars1.githubusercontent.com/u/35485279?s=460&v=4" width="60" height="60" style="border-radius: 50%;" alt="">
-                    <span ></span>
-                  </div>
-
-                  <!--发帖-->
-                </div>
-
-              </div>
+              <layoutright></layoutright>
             </el-col>
+
           </el-row>
         </div>
       </el-container>
@@ -110,21 +80,27 @@
 </template>
 
 <script>
-  import './assets/css/display.css'
-  import './assets/css/App.css'
+
+  import layouthead from "./components/layout/head"
+  import layoutright from "./components/layout/right"
 
   export default {
+    name: "App",
+    components: {
+      layouthead,
+      layoutright
+    },
     data() {
       return {
         input4: '',
         input5: '',
         input9: '',
-        m_isshowsearch: false,
+
         nodedata: {
-          1:"技术",
-          2:"源码展示",
-          3:"分享",
-          4:"心情"
+          1: "技术",
+          2: "源码展示",
+          3: "分享",
+          4: "心情"
         },
         tagsdata: {
           1: "置顶",
@@ -132,8 +108,8 @@
           3: "首发"
         },
         itemdata: {
-          0:{
-            authorimg: "https://static.studygolang.com/avatar/d395fa5d4a97a9e99a3a7b1a2e73c34c.png?imageView2/2/w/48",
+          0: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
             title: "golang是世界上最好的语言",
             tagid: 1,
             nodeid: 1,
@@ -141,8 +117,8 @@
             updateTime: "2018-12-02 18:03",
             commentNum: 16
           },
-          1:{
-            authorimg: "https://static.studygolang.com/avatar/gopher08.png?imageView2/2/w/48",
+          1: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
             title: "golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言",
             tagid: 0,
             nodeid: 3,
@@ -150,8 +126,8 @@
             updateTime: "2018-12-02 18:03",
             commentNum: 1700
           },
-          2:{
-            authorimg: "https://static.studygolang.com/avatar/7eac50527e3ce87c84fe80c639aff59d.jpg?imageView2/2/w/48",
+          2: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
             title: "golang是世界上最好的语言",
             tagid: 3,
             nodeid: 2,
@@ -163,9 +139,7 @@
       }
     },
     methods: {
-      m_showsearch() {
-        this.m_isshowsearch = !this.m_isshowsearch
-      },
+
       getTagName(tagid) {
         let tagname = this.tagsdata[tagid];
         return typeof(tagname) == 'undefined' ? "" : tagname;
@@ -174,16 +148,11 @@
         let nodename = this.nodedata[nodeid];
         return typeof(nodename) == 'undefined' ? "" : nodename;
       }
-    },
-    computed: {
-      m_searchicon() {
-        return this.m_isshowsearch ? "el-icon-close" : "el-icon-search"
-      }
     }
   }
 </script>
 
-<style>
+<style scoped>
   body {
     margin: 0;
     background-color: #E2E2E2;
@@ -233,5 +202,4 @@
     width: 100%;
     margin-bottom: 40px;
   }
-
 </style>
