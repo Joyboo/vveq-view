@@ -41,7 +41,7 @@
     methods: {
       m_showsearch() {
         this.m_isshowsearch = !this.m_isshowsearch
-      },
+      }
     },
     computed: {
       m_searchicon() {
