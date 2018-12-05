@@ -1,8 +1,5 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
-  </div>
 </template>
 
 <script>
@@ -12,12 +9,11 @@
 </script>
 
 <style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+  body {
+    margin: 0;
+  }
+  /* head搜索框 */
+  .head-search .el-input__inner {
+    border-radius: 25px;
   }
 </style>

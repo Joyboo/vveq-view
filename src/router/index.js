@@ -8,6 +8,12 @@ export default new Router({
     {
       path: '/',
       redirect: '/index'
+    },
+    {
+      path: '/index',
+      component(resolve) {
+        require(['../view/index.vue'], resolve);
+      }
     }
   ]
 })

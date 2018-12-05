@@ -1,12 +1,12 @@
 <template>
 
     <div class="public-container">
-      <div style="float: left;">
-        <span style="color: #F56C6C;">Joy</span>
-        <span style="color: #409EFF;">boo</span>
+      <div class="head-left">
+        <b class="logo-bule">V</b><b class="logo-red">V</b><b class="logo-bule">EQ</b>
+        <!--<img src="../../assets/image/logo2.png" width="60" height="60" alt="">-->
       </div>
       <div class="hidden-md-and-down head-search">
-        <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
+        <el-input size="medium" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
       </div>
       <div style="float: right;">
         <ul class="head-item">
@@ -52,5 +52,81 @@
 </script>
 
 <style scoped>
+  * {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
 
+  a {
+    color: #556;
+    text-decoration: none;
+  }
+  .public-container li {
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0 10px;
+  }
+
+  /* head搜索框父级div */
+  .public-container .head-search {
+    float: left;
+    width: 250px;
+    padding: 0 50px;
+  }
+
+  .head-left {
+    float: left;
+    font-size: 25px;
+  }
+
+  .head-item {
+    list-style: none;
+    margin: 0;
+  }
+
+  .head-item a {
+    color: #556;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .head-item a:hover {
+    color: #409EFF;
+  }
+
+  /*logo*/
+  .logo-bule {
+    color: #409EFF;
+  }
+  .logo-red {
+    color: #F56C6C;
+  }
+
+  /* 移动端 */
+  @media only screen and (max-width: 1199px) {
+    .public-container {
+      width: 100%;
+      min-height: 60px;
+      margin: 0 auto;
+    }
+
+    .m-seatch {
+      width: auto;
+      line-height: 50px;
+      margin: 0 0 10px;
+      padding: 0 10px;
+      background-color: #fff;
+    }
+  }
+
+  /* pc端 */
+  @media only screen and (min-width: 1200px) {
+    .public-container {
+      width: 70%;
+      height: 60px;
+      line-height: 60px;
+      margin: 0 auto;
+    }
+  }
 </style>

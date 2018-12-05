@@ -3,7 +3,7 @@
     <el-container>
 
       <!--头部-->
-      <el-header style="height: 40px;">
+      <el-header>
         <layouthead></layouthead>
       </el-header>
 
@@ -56,7 +56,7 @@
                       <!--数量提示-->
                       <td width="50" align="center">
                         <a href="javascript:;">
-                          <el-badge class="mark" type="info" :value="value.commentNum" />
+                          <el-badge class="mark" type="info" :value="value.commentNum"/>
                         </a>
                       </td>
                     </tr>
@@ -81,8 +81,8 @@
 
 <script>
 
-  import layouthead from "./components/layout/head"
-  import layoutright from "./components/layout/right"
+  import layouthead from "../components/layout/head"
+  import layoutright from "../components/layout/right"
 
   export default {
     name: "index",
@@ -170,7 +170,7 @@
   .el-header, .el-footer {
     background-color: white;
     text-align: center;
-    line-height: 45px;
+    line-height: 60px;
     border-bottom: 1px solid #f6f6f6;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 5px 5px rgba(0, 0, 0, 0.075);
   }
@@ -202,4 +202,168 @@
     width: 100%;
     margin-bottom: 40px;
   }
+
+  /* 公共 */
+
+  .el-header, .el-footer {
+    background-color: white;
+    text-align: center;
+    line-height: 60px;
+    border-bottom: 1px solid #f6f6f6;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 5px 5px rgba(0, 0, 0, 0.075);
+  }
+
+  .head-container {
+    margin: 0 auto;
+    width: 83%;
+  }
+
+  .public-saide {
+    border: 1px solid #eaeaea;
+  }
+
+  .el-aside {
+    background-color: white;
+    text-align: center;
+    margin: 7px;
+  }
+
+  .el-main {
+    background-color: white;
+    text-align: center;
+    line-height: 1000px;
+    margin: 7px;
+    border: 1px solid #eaeaea;
+  }
+
+  .el-container {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .father-blog-item {
+    background-color: #FFF;
+  }
+
+  .blog-item-head {
+    width: auto;
+    line-height: 25px;
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  .blog-cate {
+    margin: 5px;
+    padding: 5px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 100%;
+    text-align: left;
+    border-radius: 2px;
+  }
+
+  .blog-cate:not(.blo-cate-active):hover {
+    background-color: #F0F0F0;
+    cursor: pointer;
+  }
+
+  .blo-cate-active {
+    background-color: #409EFF;
+    color: white;
+  }
+
+  .blo-cate-active:hover {
+    cursor: pointer;
+  }
+
+  .blog-item {
+    width: auto;
+    min-height: 50px;
+    margin: 0;
+    padding: 5px;
+    line-height: 100%;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  .blog-item:hover {
+    box-shadow: inset 0 1px 5px rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
+  }
+
+  /*文章节点*/
+  .item-node {
+    background-color: #f5f5f5;
+    font-size: 8px;
+    /*transform: scale(0.5);*/
+    line-height: 10px;
+    display: inline-block;
+    padding: 4px 4px 4px 4px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    text-decoration: none;
+    color: #999;
+  }
+
+  .item-node:hover {
+    background-color: #ccc;
+  }
+
+  /*鼠标移入时增加下划线*/
+  .item-author:hover, .item-title a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /*文章标题*/
+  .item-title {
+    line-height: 25px;
+    font-size: 13px;
+    color: #778087;
+    padding: 0 3px 3px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+
+  /*回复数量tag标签*/
+  .blog-item .el-badge__content--info:hover {
+    border: 1px solid gray;
+  }
+
+  .item-tags {
+    border: 1px solid red;
+    padding: 1px;
+    color: red;
+    font-size: 8px;
+  }
+
+  .item-other {
+    font-size: 10px;
+    color: #ccc;
+  }
+
+  /* 移动端 */
+  @media only screen and (max-width: 1199px) {
+    .public-container {
+      width: 100%;
+      min-height: 60px;
+      margin: 0 auto;
+    }
+
+    .item-title {
+      font-size: 15px;
+    }
+  }
+
+  /* pc端 */
+  @media only screen and (min-width: 1200px) {
+    .public-container {
+      width: 70%;
+      height: 60px;
+      line-height: 60px;
+      margin: 0 auto;
+    }
+  }
+
 </style>
