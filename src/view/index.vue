@@ -203,8 +203,6 @@
     margin-bottom: 40px;
   }
 
-  /* 公共 */
-
   .el-header, .el-footer {
     background-color: white;
     text-align: center;
