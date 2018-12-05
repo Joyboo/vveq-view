@@ -1,12 +1,12 @@
 <template>
 
-    <div class="public-container">
+    <div class="head-container">
       <div class="head-left">
         <b class="logo-bule">V</b><b class="logo-red">V</b><b class="logo-bule">EQ</b>
         <!--<img src="../../assets/image/logo2.png" width="60" height="60" alt="">-->
       </div>
       <div class="hidden-md-and-down head-search">
-        <el-input size="medium" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
+        <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
       </div>
       <div style="float: right;">
         <ul class="head-item">
@@ -60,7 +60,7 @@
     color: #556;
     text-decoration: none;
   }
-  .public-container li {
+  .head-container li {
     position: relative;
     display: block;
     float: left;
@@ -68,7 +68,7 @@
   }
 
   /* head搜索框父级div */
-  .public-container .head-search {
+  .head-container .head-search {
     float: left;
     width: 250px;
     padding: 0 50px;
@@ -105,9 +105,9 @@
 
   /* 移动端 */
   @media only screen and (max-width: 1199px) {
-    .public-container {
+    .head-container {
       width: 100%;
-      min-height: 60px;
+      min-height: 50px;
       margin: 0 auto;
     }
 
@@ -120,12 +120,22 @@
     }
   }
 
-  /* pc端 */
+  /* pc端(小屏) */
   @media only screen and (min-width: 1200px) {
-    .public-container {
+    .head-container {
+      width: 80%;
+      height: 50px;
+      line-height: 50px;
+      margin: 0 auto;
+    }
+  }
+
+  /* pc端(大屏) */
+  @media only screen and (min-width: 1920px) {
+    .head-container {
       width: 70%;
-      height: 60px;
-      line-height: 60px;
+      height: 50px;
+      line-height: 50px;
       margin: 0 auto;
     }
   }

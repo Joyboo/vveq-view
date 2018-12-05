@@ -8,7 +8,7 @@
       </el-header>
 
       <el-container style="margin-top: 10px;">
-        <div class="public-container">
+        <div class="index-container">
           <el-row :gutter="10">
 
             <!--body-->
@@ -167,46 +167,15 @@
     text-decoration: none;
   }
 
-  .el-header, .el-footer {
-    background-color: white;
-    text-align: center;
-    line-height: 60px;
-    border-bottom: 1px solid #f6f6f6;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 5px 5px rgba(0, 0, 0, 0.075);
-  }
-
-  .head-container {
-    margin: 0 auto;
-    width: 83%;
-  }
-
-  .public-saide {
-    border: 1px solid #eaeaea;
-  }
-
-  .el-aside {
-    background-color: white;
-    text-align: center;
-    margin: 7px;
-  }
-
-  .el-main {
-    background-color: white;
-    text-align: center;
-    line-height: 1000px;
-    margin: 7px;
-    border: 1px solid #eaeaea;
-  }
-
-  body > .el-container {
-    width: 100%;
-    margin-bottom: 40px;
+  .el-header {
+    padding: 0;
+    height: 50px!important;
   }
 
   .el-header, .el-footer {
     background-color: white;
     text-align: center;
-    line-height: 60px;
+    line-height: 50px;
     border-bottom: 1px solid #f6f6f6;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 5px 5px rgba(0, 0, 0, 0.075);
   }
@@ -343,9 +312,9 @@
 
   /* 移动端 */
   @media only screen and (max-width: 1199px) {
-    .public-container {
+    .index-container {
       width: 100%;
-      min-height: 60px;
+      min-height: 50px;
       margin: 0 auto;
     }
 
@@ -354,12 +323,22 @@
     }
   }
 
-  /* pc端 */
+  /* pc端(小屏) */
   @media only screen and (min-width: 1200px) {
-    .public-container {
+    .index-container {
+      width: 80%;
+      height: 50px;
+      line-height: 50px;
+      margin: 0 auto;
+    }
+  }
+
+  /* pc端(大屏) */
+  @media only screen and (min-width: 1920px) {
+    .head-container {
       width: 70%;
-      height: 60px;
-      line-height: 60px;
+      height: 50px;
+      line-height: 50px;
       margin: 0 auto;
     }
   }
