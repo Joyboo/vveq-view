@@ -12,7 +12,7 @@ export default new Router({
     {
       path: '/index',
       component(resolve) {
-        require(['../view/index.vue'], resolve);
+        require(['../views/index.vue'], resolve);
       }
     }
   ]
