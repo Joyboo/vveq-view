@@ -7,6 +7,7 @@ import router from './router'
 import './plugins/element.js'
 import 'animate.css'
 import './assets/css/display.css'
+import './assets/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
 

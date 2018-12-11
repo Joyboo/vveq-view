@@ -17,6 +17,7 @@
           </a>
         </div>
       </div>
+
       <!--发帖，消息-->
       <div>
         <el-row>
@@ -33,16 +34,37 @@
           <el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
             <el-button size="small" disabled type="info" icon="el-icon-star-off" circle></el-button>
           </el-tooltip>
-          <el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
+          <!--<el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
             <el-button size="small" disabled type="danger" icon="el-icon-delete" circle></el-button>
-          </el-tooltip>
+          </el-tooltip>-->
         </el-row>
       </div>
     </div>
 
     <!--登录-->
     <div v-else class="login-box">
-      <div>加入我们开启探索之旅吧！</div>
+      <div>开启探索之旅吧！</div>
+      <div>
+        <el-form :model="formInline" class="demo-form-inline">
+          <el-input size="mini" name="username" v-model="formInline.username" placeholder="账号"></el-input>
+          <el-input size="mini" name="password" v-model="formInline.password" placeholder="密码"></el-input>
+          <div class="login-button">
+            <span>
+              <el-button type="primary" size="mini" @click="onSubmit">登录</el-button>
+            </span>
+            <span>
+              <a href="javascript:;">忘记密码</a>
+            </span>
+          </div>
+        </el-form>
+      </div>
+      <!--第三方登录-->
+      <div>
+        <span><i class="fa fa-github"></i></span>
+        <span><i class="fa fa-qq"></i></span>
+        <span><i class="fa fa-weibo"></i></span>
+        <span><i class="fa fa-weixin"></i></span>
+      </div>
     </div>
   </div>
 
@@ -53,7 +75,16 @@
     name: "layoutright",
     data() {
       return {
-        isLogin: true
+        isLogin: false,
+        formInline: {
+          username: '',
+          password: ''
+        }
+      }
+    },
+    methods: {
+      onSubmit() {
+        alert('submit!');
       }
     }
   }
@@ -66,15 +97,59 @@
 
   /*登录框*/
   .login-box {
-    border: 1px solid red;
-    height:200px;
+    height: 250px;
     background-color: #FFF;
+  }
+
+  /*登录title*/
+  .login-box > div:first-child {
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    border-bottom: 1px solid #e2e2e2;
+    font-weight: 700;
+    padding-left: 10px;
+  }
+
+  .login-box > div:nth-child(2) {
+    border-bottom: 1px solid #e2e2e2;
+    padding: 10px 20px 0;
+  }
+
+  /*忘记密码span*/
+  .login-button > span:nth-child(2) {
+    font-size: 12px;
+    float: right;
+    color: #778087;
+  }
+
+  .login-button > span:nth-child(2) a:hover {
+    color: #ccc;
+  }
+
+  /*第三方登录*/
+  .login-box > div:nth-child(3) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-box > div:nth-child(3) span {
+    color:#409EFF;
+    font-size: 25px;
+    margin: 0 15px;
+  }
+
+  .login-box > div:nth-child(3) span:hover {
+    cursor: pointer;
+    color: #556;
   }
 
   /*头像+昵称*/
   .user-box > div:first-child {
     border-bottom: 1px solid #e2e2e2;
   }
+
   /*发帖icon*/
   .user-box > div:nth-child(2) {
     display: flex;
@@ -86,6 +161,7 @@
     height: 60px;
     background-color: #FFF;
   }
+
   /*头像img*/
   .user-box img {
     width: 50px;
