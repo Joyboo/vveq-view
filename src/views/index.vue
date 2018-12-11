@@ -7,7 +7,7 @@
         <layouthead></layouthead>
       </el-header>
 
-      <el-container style="margin-top: 10px;">
+      <el-container style="clear:both; margin-top: 10px;">
         <div class="index-container">
           <el-row :gutter="10">
 
@@ -170,6 +170,7 @@
   .el-header {
     padding: 0;
     height: 50px!important;
+    z-index:99;
   }
 
   .el-header, .el-footer {

@@ -1,46 +1,77 @@
 <template>
 
-    <div class="head-container">
-      <div class="head-left">
-        <b class="logo-bule">V</b><b class="logo-red">V</b><b class="logo-bule">EQ</b>
-        <!--<img src="../../assets/image/logo2.png" width="60" height="60" alt="">-->
-      </div>
-      <div class="hidden-md-and-down head-search">
-        <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
-      </div>
-      <div style="float: right;">
-        <ul class="head-item">
-          <li class="hidden-lg-and-up">
-            <a herf="javascript:;" @click="m_showsearch" :class="m_searchicon"></a>
-          </li>
-          <li>
-            <a href="javascript:;">首页</a>
-          </li>
-          <li>
-            <a href="javascript:;">登录</a>
-          </li>
-        </ul>
+  <div>
+  <div class="head-container">
+    <div class="head-left">
+      <b class="logo-bule">V</b><b class="logo-red">V</b><b class="logo-bule">EQ</b>
+      <!--<img src="../../assets/image/logo2.png" width="60" height="60" alt="">-->
+    </div>
+    <div class="hidden-md-and-down head-search">
+      <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
+    </div>
+    <div style="float: right;">
+      <ul v-if="!isLogin" class="head-item">
+        <li>
+          <a href="javascript:;">首页</a>
+        </li>
+        <li>
+          <a href="javascript:;">登录</a>
+        </li>
+        <li>
+          <a href="javascript:;">注册</a>
+        </li>
+        <li>
+          <span @click="m_search_click" class="hidden-md-and-up"><i :class="m_searchicon"></i></span>
+        </li>
+      </ul>
+      <ul v-else>
+        <li>
+          <img :src="userInfo.authorimg" alt="">
+        </li>
+        <li>
+          <img :src="userInfo.authorimg" alt="">
+        </li>
+        <li>
+          <img :src="userInfo.authorimg" alt="">
+        </li>
+        <li>
+          <img :src="userInfo.authorimg" alt="">
+        </li>
+        <li>
+          <span @click="m_search_click" class="hidden-md-and-up login-search-icon"><i :class="m_searchicon"></i></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+    <!--移动端搜索框-->
+    <div v-show="m_isshowsearch" class="m-seatch hidden-lg-and-up">
+      <div class="m-search-chiddiv">
+        <el-input size="medium" autofocus v-model="m_search_value" placeholder="请输入内容">
+          <template slot="append">Go</template>
+        </el-input>
       </div>
     </div>
-
-  <!--移动端搜索框-->
-  <!--<div v-show="m_isshowsearch" class="m-seatch hidden-lg-and-up">
-    <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
-  </div>-->
+  </div>
 </template>
 
 <script>
 
   export default {
     name: "layouthead",
-    data () {
+    data() {
       return {
+        isLogin: true ,
+        userInfo: {
+          authorimg: "http://images.boblog.com/msyql.jpg"
+        },
         m_isshowsearch: false,
+        m_search_value: ""
       }
     },
     methods: {
-      m_showsearch() {
-        this.m_isshowsearch = !this.m_isshowsearch
+      m_search_click() {
+        return this.m_isshowsearch = !this.m_isshowsearch
       }
     },
     computed: {
@@ -60,11 +91,25 @@
     color: #556;
     text-decoration: none;
   }
+
   .head-container li {
     position: relative;
     display: block;
     float: left;
-    margin: 0 10px;
+    margin: 0 5px;
+  }
+  .head-container li img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: relative;
+    top: -5px;
+  }
+  /* 登录状态的搜索图标 */
+  .login-search-icon {
+    position: relative;
+    top: -14px;
+    font-size: 20px;
   }
 
   /* head搜索框父级div */
@@ -99,6 +144,7 @@
   .logo-bule {
     color: #409EFF;
   }
+
   .logo-red {
     color: #F56C6C;
   }
@@ -106,18 +152,29 @@
   /* 移动端 */
   @media only screen and (max-width: 1199px) {
     .head-container {
-      width: 100%;
+      width: 96%;
       min-height: 50px;
       margin: 0 auto;
     }
 
     .m-seatch {
-      width: auto;
-      line-height: 50px;
-      margin: 0 0 10px;
-      padding: 0 10px;
-      background-color: #fff;
+      width: 99%;
+      margin-top: 50px;
+      line-height: 110px;
+      z-index: 98;
+      position: fixed;
+      top:0;
+      opacity: 0.9;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
     }
+    .m-search-chiddiv {
+      width: 95%;
+      margin: 0 2%;
+    }
+
   }
 
   /* pc端(小屏) */

@@ -17,4 +17,9 @@
   .head-search .el-input__inner {
     border-radius: 25px;
   }
+  .el-input-group__append {
+    background-color: #409EFF;
+    border: 1px solid #409EFF;
+    color: white;
+  }
 </style>
