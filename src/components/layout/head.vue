@@ -45,13 +45,15 @@
   </div>
 
     <!--移动端搜索框-->
-    <div v-show="m_isshowsearch" class="m-seatch hidden-lg-and-up">
-      <div class="m-search-chiddiv">
-        <el-input size="medium" autofocus v-model="m_search_value" placeholder="请输入内容">
-          <template slot="append">Go</template>
-        </el-input>
+    <transition enter-active-class="animated bounceInDown" leave-active-class="animated bounceOutUp">
+      <div v-show="m_isshowsearch" class="m-seatch hidden-lg-and-up">
+        <div class="m-search-chiddiv">
+          <el-input size="medium" autofocus v-model="m_search_value" placeholder="请输入内容">
+            <template slot="append">Go</template>
+          </el-input>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -61,7 +63,7 @@
     name: "layouthead",
     data() {
       return {
-        isLogin: true ,
+        isLogin: false,
         userInfo: {
           authorimg: "http://images.boblog.com/msyql.jpg"
         },
@@ -71,7 +73,7 @@
     },
     methods: {
       m_search_click() {
-        return this.m_isshowsearch = !this.m_isshowsearch
+        this.m_isshowsearch = !this.m_isshowsearch
       }
     },
     computed: {
@@ -98,6 +100,7 @@
     float: left;
     margin: 0 5px;
   }
+
   .head-container li img {
     width: 30px;
     height: 30px;
@@ -105,6 +108,7 @@
     position: relative;
     top: -5px;
   }
+
   /* 登录状态的搜索图标 */
   .login-search-icon {
     position: relative;
@@ -163,13 +167,13 @@
       line-height: 110px;
       z-index: 98;
       position: fixed;
-      top:0;
-      opacity: 0.9;
-      background-color: white;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.9);
       border: 1px solid #ccc;
       border-bottom-left-radius: 2px;
       border-bottom-right-radius: 2px;
     }
+
     .m-search-chiddiv {
       width: 95%;
       margin: 0 2%;

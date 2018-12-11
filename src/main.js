@@ -5,7 +5,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App'
 import router from './router'
 import './plugins/element.js'
-
+import 'animate.css'
 import './assets/css/display.css'
 
 Vue.config.productionTip = false

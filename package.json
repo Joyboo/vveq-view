@@ -12,6 +12,7 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage"
   },
   "dependencies": {
+    "animate.css": "^3.7.0",
     "element-ui": "^2.4.5",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
