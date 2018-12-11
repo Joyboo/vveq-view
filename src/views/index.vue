@@ -153,19 +153,6 @@
 </script>
 
 <style scoped>
-  body {
-    margin: 0;
-    background-color: #E2E2E2;
-  }
-
-  * {
-    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  }
-
-  a {
-    color: #556;
-    text-decoration: none;
-  }
 
   .el-header {
     padding: 0;

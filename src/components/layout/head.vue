@@ -63,7 +63,7 @@
     name: "layouthead",
     data() {
       return {
-        isLogin: false,
+        isLogin: true,
         userInfo: {
           authorimg: "http://images.boblog.com/msyql.jpg"
         },
