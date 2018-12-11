@@ -60,10 +60,26 @@
       </div>
       <!--第三方登录-->
       <div>
-        <span><i class="fa fa-github"></i></span>
-        <span><i class="fa fa-qq"></i></span>
-        <span><i class="fa fa-weibo"></i></span>
-        <span><i class="fa fa-weixin"></i></span>
+        <span>
+          <el-tooltip class="item" effect="dark" content="Github登录" placement="top">
+            <i class="fa fa-github"></i>
+          </el-tooltip>
+        </span>
+        <span>
+          <el-tooltip class="item" effect="dark" content="QQ登录" placement="top">
+          <i class="fa fa-qq"></i>
+          </el-tooltip>
+        </span>
+        <span>
+          <el-tooltip class="item" effect="dark" content="微信登录" placement="top">
+          <i class="fa fa-weixin"></i>
+          </el-tooltip>
+        </span>
+        <span>
+          <el-tooltip class="item" effect="dark" content="微博登录" placement="top">
+          <i class="fa fa-weibo"></i>
+          </el-tooltip>
+        </span>
       </div>
     </div>
   </div>
@@ -135,7 +151,7 @@
   }
 
   .login-box > div:nth-child(3) span {
-    color:#409EFF;
+    color: #409EFF;
     font-size: 25px;
     margin: 0 15px;
   }
