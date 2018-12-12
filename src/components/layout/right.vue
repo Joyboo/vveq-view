@@ -3,7 +3,7 @@
   <div id="right-container">
 
     <!--个人信息-->
-    <div v-if="isLogin" class="user-box">
+    <div v-if="isLogin" class="user-box right-body">
       <!--头像+昵称-->
       <div>
         <div style="float:left;width: 50px;height:50px;padding: 5px">
@@ -21,20 +21,19 @@
       <!--发帖，消息-->
       <div>
         <el-row>
-          <el-tooltip class="item" effect="dark" content="发帖" placement="top">
-            <el-button size="small" type="primary" icon="el-icon-edit" circle></el-button>
-          </el-tooltip>
-          <el-tooltip class="item" effect="dark" content="消息" placement="top">
-            <el-button size="small" type="warning" icon="el-icon-message" circle></el-button>
-          </el-tooltip>
 
-          <el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
+          <el-button size="small" type="primary" icon="el-icon-edit">发表主题</el-button>
+          <!--hidden属性隐藏-->
+          <el-badge :value="3" class="item">
+            <el-button size="small" type="warning" icon="el-icon-message">我的消息</el-button>
+          </el-badge>
+          <!--<el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
             <el-button size="small" disabled type="success" icon="el-icon-check" circle></el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
             <el-button size="small" disabled type="info" icon="el-icon-star-off" circle></el-button>
           </el-tooltip>
-          <!--<el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
+          <el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
             <el-button size="small" disabled type="danger" icon="el-icon-delete" circle></el-button>
           </el-tooltip>-->
         </el-row>
@@ -42,8 +41,10 @@
     </div>
 
     <!--登录-->
-    <div v-else class="login-box">
-      <div class="right-title"><i class="fa fa-user-circle"></i> 开启探索之旅吧！</div>
+    <div v-else class="login-box right-body">
+      <div class="right-title">
+        <i class="fa fa-user-circle"></i> 开启探索之旅吧！
+      </div>
       <div>
         <el-form :model="formInline" class="demo-form-inline">
           <el-input size="mini" name="username" v-model="formInline.username" placeholder="账号"></el-input>
@@ -83,15 +84,102 @@
       </div>
     </div>
 
+    <!--最热-->
+    <div id="right-hot" class="right-body">
+      <div class="right-title">
+        <i class="fa fa-fire"></i> 最热
+      </div>
+
+      <div>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tbody>
+          <tr>
+            <td>
+              <a href="javascript:;" class="hot-img">
+                <img src="http://images.boblog.com/msyql.jpg" alt="">
+              </a>
+            </td>
+            <td>
+              <div class="hot-item">
+                <div>
+                  <a href="javascript:;">
+                    这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
+                  </a>
+                </div>
+                <div>
+                  <span class="hot-item-time">2018-10-29 12:09:00</span>
+                  <span class="hot-item-num">10评论</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="javascript:;" class="hot-img">
+                <img src="http://images.boblog.com/msyql.jpg" alt="">
+              </a>
+            </td>
+            <td>
+              <div class="hot-item">
+                <div>
+                  <a href="javascript:;">
+                    这是标题这是
+                  </a>
+                </div>
+                <div>
+                  <span class="hot-item-time">2018-10-29 12:09:00</span>
+                  <span class="hot-item-num">10评论</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="javascript:;" class="hot-img">
+                <img src="http://images.boblog.com/msyql.jpg" alt="">
+              </a>
+            </td>
+            <td>
+              <div class="hot-item">
+                <div>
+                  <a href="javascript:;">
+                    这是标题这是标题这是标题这是标
+                  </a>
+                </div>
+                <div>
+                  <span class="hot-item-time">2018-10-29 12:09:00</span>
+                  <span class="hot-item-num">10评论</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!--本站统计-->
-    <div id="local-stat">
+    <div id="local-stat" class="right-body">
       <div class="right-title">
         <i class="fa fa-signal"></i> 本站统计
+      </div>
+
+      <div>
+        <ul>
+          <li>注册会员：123</li>
+          <li>发表主题：234</li>
+          <li>发表评论：234</li>
+          <li>本站浏览：234</li>
+        </ul>
       </div>
     </div>
 
     <!--推荐-->
-    <div></div>
+    <div id="recommend" class="right-body">
+      <div class="right-title">
+        <i class="fa fa-flag"></i> 推荐
+      </div>
+    </div>
 
   </div>
 
@@ -102,7 +190,7 @@
     name: "layoutright",
     data() {
       return {
-        isLogin: true,
+        isLogin: false,
         formInline: {
           username: '',
           password: ''
@@ -119,6 +207,12 @@
 
 <style>
 
+  .right-body {
+    background-color: #FFF;
+    margin-bottom: 10px;
+    clear: both;
+  }
+
   /*body分页*/
   #body-pages .el-pager li, #body-pages button {
     background: #fff;
@@ -127,21 +221,14 @@
     border-radius: 0px;
     color: #409EFF;
   }
+
   #body-pages .el-pager .active {
     background: #f5f5f5;
-    border:1px solid #dddddd;
+    border: 1px solid #dddddd;
     color: #999999;
   }
 
-  #right-container {
-    /*border: 1px solid red;*/
-  }
-
   /*登录框*/
-  .login-box {
-    /*height: 250px;*/
-    background-color: #FFF;
-  }
 
   /*right-title*/
   .right-title {
@@ -155,7 +242,7 @@
 
   .login-box > div:nth-child(2) {
     border-bottom: 1px solid #e2e2e2;
-    padding: 10px 20px 0;
+    padding: 10px 20px;
   }
 
   /*忘记密码span*/
@@ -190,6 +277,10 @@
   }
 
   /*头像+昵称*/
+  .user-box > div {
+    height: 60px;
+  }
+
   .user-box > div:first-child {
     border-bottom: 1px solid #e2e2e2;
   }
@@ -199,11 +290,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .user-box > div {
-    height: 60px;
-    background-color: #FFF;
   }
 
   /*头像img*/
@@ -221,22 +307,57 @@
   }
 
   /*本站统计*/
-  #local-stat {
-    margin-top: 10px;
-    background-color: #FFF;
-    clear: both;
+  #local-stat > div:nth-child(2) ul {
+    padding: 10px;
+    margin: 0;
   }
 
+  #local-stat > div:nth-child(2) li {
+    list-style: none;
+    font-size: 13px;
+  }
+
+  /*最热*/
+  .hot-item {
+    font-size: 12px;
+    color: #556;
+    padding: 5px;
+  }
+
+  .hot-item a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .hot-img img {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+  }
+
+  .hot-item-time {
+    color: #ccc;
+    font-size: 10px;
+  }
+  .hot-item-num {
+    color: #ccc;
+    font-size: 10px;
+    background-color: #f5f5f5;
+    padding: 2px;
+  }
+
+  .el-input {
+    margin: 10px 0;
+  }
 
   /* 移动端 */
   @media only screen and (max-width: 1199px) {
-    .el-input {
-      margin: 10px 0;
-    }
+
     .login-button {
       margin: 10px;
     }
-    .user-box,.login-box {
+
+    .user-box, .login-box {
       margin-top: 10px;
     }
   }

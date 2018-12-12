@@ -403,7 +403,6 @@
   @media only screen and (max-width: 1199px) {
     .index-container {
       width: 100%;
-      min-height: 50px;
       margin: 0 auto;
     }
 
@@ -424,7 +423,6 @@
   @media only screen and (min-width: 1200px) {
     .index-container {
       width: 80%;
-      line-height: 50px;
       margin: 0 auto;
     }
 
@@ -447,7 +445,6 @@
     .index-container {
       width: 70%;
       height: 50px;
-      line-height: 50px;
       margin: 0 auto;
     }
 
