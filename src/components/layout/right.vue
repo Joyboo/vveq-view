@@ -269,6 +269,7 @@
     color: #409EFF;
     font-size: 25px;
     margin: 0 15px;
+    width: 12%;
   }
 
   .login-box > div:nth-child(3) span:hover {

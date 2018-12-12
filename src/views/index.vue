@@ -444,7 +444,6 @@
   @media only screen and (min-width: 1920px) {
     .index-container {
       width: 70%;
-      height: 50px;
       margin: 0 auto;
     }
 
