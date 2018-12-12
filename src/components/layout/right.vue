@@ -346,7 +346,7 @@
     padding: 2px;
   }
 
-  .el-input {
+  #right-container .el-input {
     margin: 10px 0;
   }
 
