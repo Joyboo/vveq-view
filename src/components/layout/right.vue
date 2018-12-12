@@ -83,22 +83,6 @@
       </div>
     </div>
 
-    <!--活跃会员-->
-    <!--<div id="active-member">
-      <div class="right-title">
-        <i class="fa fa-commenting"></i> 活跃会员
-      </div>
-      <div>
-        &lt;!&ndash;会员&ndash;&gt;
-        <div class="members">
-          <div>
-            <img src="https://avatars1.githubusercontent.com/u/35485279?s=460&v=4" alt="">
-          </div>
-          <div>Joyboo</div>
-        </div>
-      </div>
-    </div>-->
-
     <!--本站统计-->
     <div id="local-stat">
       <div class="right-title">
@@ -118,7 +102,7 @@
     name: "layoutright",
     data() {
       return {
-        isLogin: false,
+        isLogin: true,
         formInline: {
           username: '',
           password: ''
@@ -133,14 +117,29 @@
   }
 </script>
 
-<style scoped>
+<style>
+
+  /*body分页*/
+  #body-pages .el-pager li, #body-pages button {
+    background: #fff;
+    margin: 0;
+    border: 1px solid #dddddd;
+    border-radius: 0px;
+    color: #409EFF;
+  }
+  #body-pages .el-pager .active {
+    background: #f5f5f5;
+    border:1px solid #dddddd;
+    color: #999999;
+  }
+
   #right-container {
     /*border: 1px solid red;*/
   }
 
   /*登录框*/
   .login-box {
-    height: 250px;
+    /*height: 250px;*/
     background-color: #FFF;
   }
 
@@ -172,9 +171,11 @@
 
   /*第三方登录*/
   .login-box > div:nth-child(3) {
+    clear: both;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 50px;
   }
 
   .login-box > div:nth-child(3) span {
@@ -228,6 +229,16 @@
 
 
   /* 移动端 */
-  @media only screen and (max-width: 1199px) {}
+  @media only screen and (max-width: 1199px) {
+    .el-input {
+      margin: 10px 0;
+    }
+    .login-button {
+      margin: 10px;
+    }
+    .user-box,.login-box {
+      margin-top: 10px;
+    }
+  }
 
 </style>
