@@ -3,7 +3,7 @@
   <div id="right-container">
 
     <!--个人信息-->
-    <div v-if="isLogin" class="user-box hidden-md-and-down">
+    <div v-if="isLogin" class="user-box">
       <!--头像+昵称-->
       <div>
         <div style="float:left;width: 50px;height:50px;padding: 5px">
@@ -43,7 +43,7 @@
 
     <!--登录-->
     <div v-else class="login-box">
-      <div>开启探索之旅吧！</div>
+      <div class="right-title"><i class="fa fa-user-circle"></i> 开启探索之旅吧！</div>
       <div>
         <el-form :model="formInline" class="demo-form-inline">
           <el-input size="mini" name="username" v-model="formInline.username" placeholder="账号"></el-input>
@@ -82,6 +82,33 @@
         </span>
       </div>
     </div>
+
+    <!--活跃会员-->
+    <!--<div id="active-member">
+      <div class="right-title">
+        <i class="fa fa-commenting"></i> 活跃会员
+      </div>
+      <div>
+        &lt;!&ndash;会员&ndash;&gt;
+        <div class="members">
+          <div>
+            <img src="https://avatars1.githubusercontent.com/u/35485279?s=460&v=4" alt="">
+          </div>
+          <div>Joyboo</div>
+        </div>
+      </div>
+    </div>-->
+
+    <!--本站统计-->
+    <div id="local-stat">
+      <div class="right-title">
+        <i class="fa fa-signal"></i> 本站统计
+      </div>
+    </div>
+
+    <!--推荐-->
+    <div></div>
+
   </div>
 
 </template>
@@ -108,7 +135,7 @@
 
 <style scoped>
   #right-container {
-    border: 1px solid #f6f6f6;
+    /*border: 1px solid red;*/
   }
 
   /*登录框*/
@@ -117,8 +144,8 @@
     background-color: #FFF;
   }
 
-  /*登录title*/
-  .login-box > div:first-child {
+  /*right-title*/
+  .right-title {
     height: 35px;
     line-height: 35px;
     font-size: 14px;
@@ -191,4 +218,16 @@
     opacity: 0.5;
     text-decoration: underline;
   }
+
+  /*本站统计*/
+  #local-stat {
+    margin-top: 10px;
+    background-color: #FFF;
+    clear: both;
+  }
+
+
+  /* 移动端 */
+  @media only screen and (max-width: 1199px) {}
+
 </style>

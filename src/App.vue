@@ -39,4 +39,18 @@
     border: 1px solid #409EFF;
     color: white;
   }
+
+  /*body分页*/
+  #body-pages .el-pager li, #body-pages button {
+    background: #fff;
+    margin: 0;
+    border: 1px solid #dddddd;
+    border-radius: 0px;
+    color: #409EFF;
+  }
+  #body-pages .el-pager .active {
+    background: #f5f5f5;
+    border:1px solid #dddddd;
+    color: #999999;
+  }
 </style>

@@ -9,10 +9,9 @@
 
       <el-container style="clear:both; margin-top: 10px;">
         <div class="index-container">
-          <el-row :gutter="10">
 
             <!--body-->
-            <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
+            <div id="index-body">
               <div class="father-blog-item">
                 <!--第一个div显示节点-->
                 <div class="blog-item-head">
@@ -65,16 +64,21 @@
                 </div>
 
               </div>
-            </el-col>
+
+              <!--分页-->
+              <div id="body-pages">
+                <el-pagination background layout="prev, pager, next" :total="80">
+                </el-pagination>
+              </div>
+            </div>
 
             <!--右侧边栏-->
-            <el-col :lg="6" :xl="6" class="hidden-md-and-down">
+            <div id="right-body">
               <layoutright></layoutright>
-            </el-col>
-
-          </el-row>
+            </div>
         </div>
       </el-container>
+
     </el-container>
   </div>
 </template>
@@ -134,6 +138,69 @@
             name: "Joyboo",
             updateTime: "2018-12-02 18:03",
             commentNum: 0
+          },
+          3: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
+            title: "golang是世界上最好的语言",
+            tagid: 0,
+            nodeid: 1,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 16
+          },
+          4: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
+            title: "golang是世界上最好的语言",
+            tagid: 0,
+            nodeid: 1,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 16
+          },
+          5: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
+            title: "golang是世界上最好的语言",
+            tagid: 0,
+            nodeid: 1,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 16
+          },
+          6: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
+            title: "golang是世界上最好的语言",
+            tagid: 0,
+            nodeid: 1,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 16
+          },
+          7: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
+            title: "golang是世界上最好的语言",
+            tagid: 0,
+            nodeid: 1,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 16
+          },
+          8: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
+            title: "golang是世界上最好的语言",
+            tagid: 0,
+            nodeid: 1,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 16
+          },
+          9: {
+            authorimg: "http://images.boblog.com/msyql.jpg",
+            title: "golang是世界上最好的语言",
+            tagid: 0,
+            nodeid: 1,
+            name: "Joyboo",
+            updateTime: "2018-12-02 18:03",
+            commentNum: 16
           }
         }
       }
@@ -298,6 +365,17 @@
     color: #ccc;
   }
 
+  /*分页父div*/
+  #body-pages {
+    width: 100%;
+    line-height: 40px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+  }
+
   /* 移动端 */
   @media only screen and (max-width: 1199px) {
     .index-container {
@@ -309,6 +387,14 @@
     .item-title {
       font-size: 15px;
     }
+
+    #index-body {
+      width: 100%;
+    }
+
+    #right-body {
+      width: 100%;
+    }
   }
 
   /* pc端(小屏) */
@@ -319,6 +405,19 @@
       line-height: 50px;
       margin: 0 auto;
     }
+
+    #index-body {
+      width: 73%;
+      margin-right: 10px;
+    }
+
+    #right-body {
+      width: 25%;
+    }
+
+    #index-body,#right-body {
+      float: left;
+    }
   }
 
   /* pc端(大屏) */
@@ -328,6 +427,19 @@
       height: 50px;
       line-height: 50px;
       margin: 0 auto;
+    }
+
+    #index-body {
+      width: 73%;
+      margin-right: 10px;
+    }
+
+    #right-body {
+      width: 25%;
+    }
+
+    #index-body,#right-body {
+      float: left;
     }
   }
 
