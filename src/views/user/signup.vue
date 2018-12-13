@@ -143,10 +143,10 @@
           email: ''
         },
         rules2: {
-          username: [{validator: validateUsername, trigger: 'blur'}],
-          password: [{validator: validatePassword, trigger: 'blur'}],
-          checkPassword: [{validator: validatePassword2, trigger: 'blur'}],
-          email: [{validator: checkEmail, trigger: 'blur'}]
+          username: [{validator: validateUsername, trigger: 'blur', required: true}],
+          password: [{validator: validatePassword, trigger: 'blur', required: true}],
+          checkPassword: [{validator: validatePassword2, trigger: 'blur', required: true}],
+          email: [{validator: checkEmail, trigger: 'blur', required: true}]
         },
         form: {
           CaptchaType: "character",
@@ -242,6 +242,7 @@
     width: 50%;
     margin: 0 auto;
     padding-right: 70px;
+    text-align: left;
   }
 
   /* 移动端 */
@@ -251,16 +252,24 @@
       margin: 0 auto;
     }
 
-    .item-title {
-      font-size: 15px;
-    }
-
     #index-body {
       width: 100%;
     }
 
     #right-body {
       width: 100%;
+    }
+
+    #signup-form {
+      background-color: #FFF;
+      text-align: center;
+      padding: 10px;
+    }
+
+    #signup-form .el-form {
+      width: 95%;
+      margin: 0 auto;
+      padding-right: 0;
     }
   }
 
