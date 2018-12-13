@@ -63,6 +63,7 @@
   import layouthead from "../../components/layout/head"
   import layoutright from "../../components/layout/right"
   import layoutfooter from "../../components/layout/footer"
+  import axios from "axios"
 
   export default {
     name: "signup",
@@ -127,8 +128,39 @@
           password: [{validator: validatePassword, trigger: 'blur'}],
           checkPassword: [{validator: validatePassword2, trigger: 'blur'}],
           email: [{validator: checkEmail, trigger: 'blur'}]
-        }
-      };
+        },
+        form: {
+          CaptchaType: "character",
+          Id: '',
+          VerifyValue: '',
+          ConfigAudio: {
+            CaptchaLen: 6,
+            Language: 'zh'
+          },
+          ConfigCharacter: {
+            Height: 60,
+            Width: 240,
+            Mode: 2,
+            ComplexOfNoiseText: 0,
+            ComplexOfNoiseDot: 0,
+            IsUseSimpleFont: true,
+            IsShowHollowLine: false,
+            IsShowNoiseDot: false,
+            IsShowNoiseText: false,
+            IsShowSlimeLine: false,
+            IsShowSineLine: false,
+            CaptchaLen: 6
+          },
+          ConfigDigit: {
+            Height: 80,
+            Width: 240,
+            CaptchaLen: 5,
+            MaxSkew: 0.7,
+            DotCount: 80
+          }
+        },
+        loading: true
+      }
     },
     methods: {
       submitForm(formName) {
@@ -143,7 +175,30 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      }
+      },
+      // 获取验证码
+      generateCaptcha() {
+        this.loading = true;
+        let that = this;
+        //发送 post 请求
+        axios.post('localhost:8000/api/verify', that.form)
+          .then((response) => {
+            that.loading = false;
+            that.form.Id = response.data.captchaId;
+            that.blob = response.data.data;
+          })
+          .catch((error) => {
+            that.loading = false;
+            that.$notify({
+              title: 500,
+              message: '网络错误',
+              type: "error"
+            });
+          });
+      },
+    },
+    mounted() {
+      this.generateCaptcha()
     }
   }
 </script>

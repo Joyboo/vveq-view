@@ -54,6 +54,7 @@
     background-color: #409EFF;
     font-size: 35px;
     padding: 5px;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,.15);
   }
 
   #back-top:hover {
