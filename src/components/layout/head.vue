@@ -2,10 +2,9 @@
 
   <div>
     <div class="head-container">
-      <div class="head-left">
+      <router-link to="/" class="head-left">
         <div></div>
-        <!--<b class="logo-bule">V</b><b class="logo-red">V</b><b class="logo-bule">EQ</b>-->
-      </div>
+      </router-link>
       <div class="hidden-md-and-down head-search">
         <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
       </div>
