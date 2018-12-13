@@ -1,5 +1,8 @@
 <template>
   <div id="footer-container">
+    <!--backTop插槽-->
+    <slot></slot>
+
     <div style="float: left;">
       <div id="footer-info">
         <div class="footer-item">
@@ -19,7 +22,7 @@
       </div>
       <!--备案号-->
       <div id="footer-beian">
-        <a href="http://www.miibeian.gov.cn">粤ICP备18133856号</a>
+        <a href="http://www.miibeian.gov.cn" target="_blank">粤ICP备18133856号</a>
       </div>
     </div>
 
@@ -57,7 +60,12 @@
 
   /*备案信息*/
   #footer-beian {
-    font-size: 14px;
+    font-size: 12px;
+    color: #ccc;
+  }
+
+  #footer-beian a:hover {
+    text-decoration: underline;
   }
 
   /* 移动端 */

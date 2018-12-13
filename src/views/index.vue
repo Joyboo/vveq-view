@@ -80,7 +80,7 @@
       </el-container>
 
       <el-footer>
-        <layoutfooter></layoutfooter>
+        <layoutfooter><backtop></backtop></layoutfooter>
       </el-footer>
 
     </el-container>
@@ -92,13 +92,15 @@
   import layouthead from "../components/layout/head"
   import layoutright from "../components/layout/right"
   import layoutfooter from "../components/layout/footer"
+  import backtop from "../components/backTop"
 
   export default {
     name: "index",
     components: {
       layouthead,
       layoutright,
-      layoutfooter
+      layoutfooter,
+      backtop
     },
     data() {
       return {
