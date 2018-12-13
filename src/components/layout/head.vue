@@ -1,48 +1,52 @@
 <template>
 
   <div>
-  <div class="head-container">
-    <div class="head-left">
-      <b class="logo-bule">V</b><b class="logo-red">V</b><b class="logo-bule">EQ</b>
-      <!--<img src="../../assets/image/logo2.png" width="60" height="60" alt="">-->
+    <div class="head-container">
+      <div class="head-left">
+        <div></div>
+        <!--<b class="logo-bule">V</b><b class="logo-red">V</b><b class="logo-bule">EQ</b>-->
+      </div>
+      <div class="hidden-md-and-down head-search">
+        <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
+      </div>
+      <div style="float: right;">
+        <ul v-if="!isLogin" class="head-item">
+          <li>
+            <a href="javascript:;">首页</a>
+          </li>
+          <li>
+            <a href="javascript:;">登录</a>
+          </li>
+          <li>
+            <router-link to="/user/signup">注册</router-link>
+          </li>
+          <li>
+            <span @click="m_search_click" class="hidden-md-and-up">
+              <i :class="m_searchicon"></i>
+            </span>
+          </li>
+        </ul>
+        <ul v-else>
+          <li>
+            <img :src="userInfo.authorimg" alt="">
+          </li>
+          <li>
+            <img :src="userInfo.authorimg" alt="">
+          </li>
+          <li>
+            <img :src="userInfo.authorimg" alt="">
+          </li>
+          <li>
+            <img :src="userInfo.authorimg" alt="">
+          </li>
+          <li>
+            <span @click="m_search_click" class="hidden-md-and-up login-search-icon">
+              <i :class="m_searchicon"></i>
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="hidden-md-and-down head-search">
-      <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
-    </div>
-    <div style="float: right;">
-      <ul v-if="!isLogin" class="head-item">
-        <li>
-          <a href="javascript:;">首页</a>
-        </li>
-        <li>
-          <a href="javascript:;">登录</a>
-        </li>
-        <li>
-          <router-link to="/user/signup">注册</router-link>
-        </li>
-        <li>
-          <span @click="m_search_click" class="hidden-md-and-up"><i :class="m_searchicon"></i></span>
-        </li>
-      </ul>
-      <ul v-else>
-        <li>
-          <img :src="userInfo.authorimg" alt="">
-        </li>
-        <li>
-          <img :src="userInfo.authorimg" alt="">
-        </li>
-        <li>
-          <img :src="userInfo.authorimg" alt="">
-        </li>
-        <li>
-          <img :src="userInfo.authorimg" alt="">
-        </li>
-        <li>
-          <span @click="m_search_click" class="hidden-md-and-up login-search-icon"><i :class="m_searchicon"></i></span>
-        </li>
-      </ul>
-    </div>
-  </div>
 
     <!--移动端搜索框-->
     <transition enter-active-class="animated bounceInDown" leave-active-class="animated bounceOutUp">
@@ -125,7 +129,19 @@
 
   .head-left {
     float: left;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+  }
+
+  .head-left > div:first-child {
     font-size: 25px;
+    width: 100px;
+    height: 35px;
+    background: url("../../assets/image/logo2.png") no-repeat -7px -42px;
+    background-size: 120px;
   }
 
   .head-item {

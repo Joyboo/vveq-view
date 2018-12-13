@@ -72,6 +72,25 @@
       layoutright,
       layoutfooter,
     },
+    // route离开事件
+    beforeRouteLeave(to, from, next) {
+      if (this.signupValue.username != '' || this.signupValue.email || this.signupValue.password) {
+        this.$confirm('检测到有未提交的内容, 确认要离开吗?', '请确认', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          next()
+        }).catch(() => {
+          /*this.$message({
+            type: 'info',
+            message: '已取消'
+          });*/
+        });
+      } else {
+        next()
+      }
+    },
     data() {
       /*用户名验证规则*/
       var validateUsername = (rule, value, callback) => {
