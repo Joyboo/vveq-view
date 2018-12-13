@@ -7,7 +7,7 @@
         <layouthead></layouthead>
       </el-header>
 
-      <el-container style="clear:both; margin-top: 10px;">
+      <el-container>
         <div class="index-container">
 
           <!--body-->
@@ -228,50 +228,6 @@
 </script>
 
 <style scoped>
-
-  .el-header {
-    padding: 0;
-    height: 50px !important;
-    z-index: 99;
-  }
-
-  .el-header, .el-footer {
-    background-color: white;
-    text-align: center;
-    line-height: 50px;
-    border-bottom: 1px solid #f6f6f6;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 5px 5px rgba(0, 0, 0, 0.075);
-  }
-
-  .head-container {
-    margin: 0 auto;
-    width: 83%;
-  }
-
-  .public-saide {
-    border: 1px solid #eaeaea;
-  }
-
-  .el-aside {
-    background-color: white;
-    text-align: center;
-    margin: 7px;
-  }
-
-  .el-main {
-    background-color: white;
-    text-align: center;
-    line-height: 1000px;
-    margin: 7px;
-    border: 1px solid #eaeaea;
-  }
-
-  .el-footer {
-    margin-top: 10px;
-    padding: 0;
-    height: auto!important;
-  }
-
   .father-blog-item {
     background-color: #FFF;
   }

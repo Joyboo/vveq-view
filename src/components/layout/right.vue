@@ -4,6 +4,9 @@
 
     <!--个人信息-->
     <div v-if="isLogin" class="user-box right-body">
+      <div class="right-title">
+        <i class="fa fa-user-circle"></i> 桃花源
+      </div>
       <!--头像+昵称-->
       <div>
         <div style="float:left;width: 50px;height:50px;padding: 5px">
@@ -17,7 +20,6 @@
           </a>
         </div>
       </div>
-
       <!--发帖，消息-->
       <div>
         <el-row>
@@ -278,16 +280,16 @@
   }
 
   /*头像+昵称*/
-  .user-box > div {
+  .user-box > div:not(:first-child) {
     height: 60px;
   }
 
-  .user-box > div:first-child {
+  .user-box > div:nth-child(2) {
     border-bottom: 1px solid #e2e2e2;
   }
 
   /*发帖icon*/
-  .user-box > div:nth-child(2) {
+  .user-box > div:nth-child(3) {
     display: flex;
     justify-content: center;
     align-items: center;

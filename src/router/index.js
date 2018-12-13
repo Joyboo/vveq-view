@@ -9,11 +9,17 @@ export default new Router({
     {
       path: '/',
       redirect: '/index'
-    },
-    {
+    }, {
+      // 首页
       path: '/index',
       component(resolve) {
         require(['../views/index.vue'], resolve);
+      }
+    }, {
+      // 用户注册
+      path: '/user/signup',
+      component(resolve) {
+        require(['../views/user/signup.vue'], resolve);
       }
     }
   ]

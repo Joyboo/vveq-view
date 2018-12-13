@@ -18,7 +18,7 @@
           <a href="javascript:;">登录</a>
         </li>
         <li>
-          <a href="javascript:;">注册</a>
+          <router-link to="/user/signup">注册</router-link>
         </li>
         <li>
           <span @click="m_search_click" class="hidden-md-and-up"><i :class="m_searchicon"></i></span>
@@ -63,7 +63,7 @@
     name: "layouthead",
     data() {
       return {
-        isLogin: true,
+        isLogin: false,
         userInfo: {
           authorimg: "http://images.boblog.com/msyql.jpg"
         },
