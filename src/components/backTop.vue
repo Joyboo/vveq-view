@@ -24,7 +24,8 @@
             window.pageYOffset =
             document.body.scrollTop = scrolled;
           } else {
-            clearInterval(backVal)
+            this.show = false;
+            clearInterval(backVal);
           }
         }, 1)
       },
