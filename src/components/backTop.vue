@@ -31,7 +31,7 @@
       },
       handleScroll() {
         let scrolled = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
-        this.show = !(scrolled == 0);
+        this.show = !(scrolled <= 0);
       }
     },
     mounted() {
