@@ -63,7 +63,7 @@
   import layouthead from "../../components/layout/head"
   import layoutright from "../../components/layout/right"
   import layoutfooter from "../../components/layout/footer"
-  import axios from "axios"
+  import http from "../../util/http.js"
 
   export default {
     name: "signup",
@@ -199,21 +199,18 @@
       generateCaptcha() {
         this.loading = true;
         let that = this;
-        //发送 post 请求
-        axios.post('localhost:8000/api/verify', that.form)
-          .then((response) => {
-            that.loading = false;
-            that.form.Id = response.data.captchaId;
-            that.blob = response.data.data;
+
+     /*   axios.post('http://test.vveq.com/api/verify', that.form)
+          .then(function (response) {
+            console.log(response);
           })
-          .catch((error) => {
-            that.loading = false;
-            that.$notify({
-              title: 500,
-              message: '网络错误',
-              type: "error"
-            });
-          });
+          .catch(function (error) {
+            console.log(error);
+          });*/
+
+        http.post('/api/verify', that.form)
+          .then((res) => {console.log("success")})
+          .catch((err) => {console.log("err1:", err)});
       },
     },
     mounted() {

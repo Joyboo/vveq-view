@@ -1,5 +1,5 @@
 import Util from './util.js'
-//import qs from 'qs'
+// import qs from 'qs'
 
 Util.ajax.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest'
@@ -7,47 +7,36 @@ Util.ajax.defaults.headers.common = {
 
 Util.ajax.interceptors.request.use(
   config => {
-
     // 获取token
-    // config.headers.common['Authorization'] = 'Bearer ' + Vue.ls.get("web-token");
+    config.headers.common['Authorization'] = 'Bearer ' + Vue.ls.get("web-token");
     return config
-
   },
   error => {
     return Promise.reject(error)
-
   }
 );
 
 Util.ajax.interceptors.response.use(
   response => {
-
     // 如果后端有新的token则重新缓存
     let newToken = response.headers['new-token'];
-
     if (newToken) {
       console.log("有新的token: ", newToken);
       // Vue.ls.set("web-token", newToken);
     }
-
     return response;
-
   },
   error => {
-    let response = error.response;
-    if (response.status == 401) {
-      // 处理401错误
-    } else if (response.status == 403) {
-      // 处理403错误
-    }
-    return Promise.reject(response)
-
+    console.log("error2: ", error);
+    return Promise.reject(error.response)
   }
 );
 
-export default {
-  post(url, params = {}, successCallback, errorCallback) {
+/*const _successCallback = (res) => {};
+const _errorCallback = (err) => {};*/
 
+export default {
+  post(url, params = {}) {
     return Util.ajax({
       method: 'post',
       url: url,
@@ -79,7 +68,6 @@ export default {
   },
 
   put(url, params = {}) {
-
     return Util.ajax({
       method: 'put',
       url: url,
