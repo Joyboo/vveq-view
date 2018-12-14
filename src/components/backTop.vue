@@ -16,21 +16,32 @@
     },
     methods: {
       backTop() {
+        // 移动次数
+        let num = 100;
+        // 总高度
+        let scrolled = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        // 每次移动距离
+        let offset = parseInt(scrolled / num);
+        // 总消耗时间(毫秒)
+        let time = 200
+        // 定时器间隔时间
+        let o = parseInt(time / num)
+
         let backVal = setInterval(() => {
-          let scrolled = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
-          if (scrolled > 0) {
-            scrolled -= 10;
-            document.documentElement.scrollTop =
+          let s = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+          if (s > 0) {
+            s -= offset;
             window.pageYOffset =
-            document.body.scrollTop = scrolled;
+              document.body.scrollTop =
+                document.documentElement.scrollTop = s;
           } else {
             this.show = false;
             clearInterval(backVal);
           }
-        }, 1)
+        }, o)
       },
       handleScroll() {
-        let scrolled = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
+        let scrolled = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
         this.show = !(scrolled <= 0);
       }
     },
@@ -54,7 +65,7 @@
     background-color: #409EFF;
     font-size: 35px;
     padding: 5px;
-    box-shadow: 0 6px 12px 0 rgba(0,0,0,.15);
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, .15);
   }
 
   #back-top:hover {

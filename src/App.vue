@@ -63,7 +63,7 @@
     height: auto !important;
   }
 
-  .el-container {
+  .el-container:not(:first-child) {
     clear: both;
     margin-top: 10px;
   }
