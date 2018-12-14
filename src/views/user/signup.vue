@@ -99,7 +99,17 @@
         } else if (!(/^[a-zA-Z_\d]{4,20}$/.test(value))) {
           callback(new Error('只能包含字母、数字或下划线，4-20位'));
         } else {
-          callback();
+          http.get('/api/user/usernameIsExists/' + value)
+            .then(res => {
+              if (res.data.status == 0) {
+                callback()
+              } else {
+                callback(new Error("用户名已存在"))
+              }
+            })
+            .catch(err => {
+              console.log("err1:", err)
+            });
         }
       };
       /*首次密码验证规则*/
@@ -110,7 +120,7 @@
           callback(new Error('密码过短!'))
         } else {
           if (this.signupValue.checkPassword !== '') {
-            this.$refs.signupValue.validateField('checkPass');
+            this.$refs.signupValue.validateField('checkPassword');
           }
           callback();
         }
@@ -129,7 +139,7 @@
       var checkEmail = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入邮箱'));
-        } else if (!(/^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(\.[0-9A-Za-z]+)+$/.test(value))) {
+        } else if (!(/^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(\.[A-Za-z]+)+$/.test(value))) {
           callback(new Error('请输入有效的邮箱地址!'));
         } else {
           callback();
@@ -148,36 +158,6 @@
           checkPassword: [{validator: validatePassword2, trigger: 'blur', required: true}],
           email: [{validator: checkEmail, trigger: 'blur', required: true}]
         },
-        form: {
-          CaptchaType: "character",
-          Id: '',
-          VerifyValue: '',
-          ConfigAudio: {
-            CaptchaLen: 6,
-            Language: 'zh'
-          },
-          ConfigCharacter: {
-            Height: 60,
-            Width: 240,
-            Mode: 2,
-            ComplexOfNoiseText: 0,
-            ComplexOfNoiseDot: 0,
-            IsUseSimpleFont: true,
-            IsShowHollowLine: false,
-            IsShowNoiseDot: false,
-            IsShowNoiseText: false,
-            IsShowSlimeLine: false,
-            IsShowSineLine: false,
-            CaptchaLen: 6
-          },
-          ConfigDigit: {
-            Height: 80,
-            Width: 240,
-            CaptchaLen: 5,
-            MaxSkew: 0.7,
-            DotCount: 80
-          }
-        },
         loading: true
       }
     },
@@ -185,36 +165,22 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            http.post('/api/user', this.signupValue)
+              .then(res => {
+                console.log("res: ", res)
+              })
+              .catch(err => {
+                console.log("err1:", err)
+              });
           } else {
-            console.log('error submit!!');
+            this.$message.error('网络错误, 请重试');
             return false;
           }
         });
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      },
-      // 获取验证码
-      generateCaptcha() {
-        this.loading = true;
-        let that = this;
-
-     /*   axios.post('http://test.vveq.com/api/verify', that.form)
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });*/
-
-        http.post('/api/verify', that.form)
-          .then((res) => {console.log("success")})
-          .catch((err) => {console.log("err1:", err)});
-      },
-    },
-    mounted() {
-      this.generateCaptcha()
+      }
     }
   }
 </script>

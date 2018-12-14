@@ -7,8 +7,6 @@ Util.ajax.defaults.headers.common = {
 
 Util.ajax.interceptors.request.use(
   config => {
-    // 获取token
-    config.headers.common['Authorization'] = 'Bearer ' + Vue.ls.get("web-token");
     return config
   },
   error => {
@@ -18,12 +16,7 @@ Util.ajax.interceptors.request.use(
 
 Util.ajax.interceptors.response.use(
   response => {
-    // 如果后端有新的token则重新缓存
-    let newToken = response.headers['new-token'];
-    if (newToken) {
-      console.log("有新的token: ", newToken);
-      // Vue.ls.set("web-token", newToken);
-    }
+
     return response;
   },
   error => {
@@ -31,9 +24,6 @@ Util.ajax.interceptors.response.use(
     return Promise.reject(error.response)
   }
 );
-
-/*const _successCallback = (res) => {};
-const _errorCallback = (err) => {};*/
 
 export default {
   post(url, params = {}) {
