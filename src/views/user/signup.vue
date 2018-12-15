@@ -187,32 +187,7 @@
         verifyForm: {
           CaptchaType: "character",
           Id: '',
-          VerifyValue: '',
-          ConfigAudio: {
-            CaptchaLen: 6,
-            Language: 'zh'
-          },
-          ConfigCharacter: {
-            Height: 60,
-            Width: 240,
-            Mode: 2,
-            ComplexOfNoiseText: 0,
-            ComplexOfNoiseDot: 0,
-            IsUseSimpleFont: true,
-            IsShowHollowLine: false,
-            IsShowNoiseDot: false,
-            IsShowNoiseText: false,
-            IsShowSlimeLine: false,
-            IsShowSineLine: false,
-            CaptchaLen: 6
-          },
-          ConfigDigit: {
-            Height: 80,
-            Width: 240,
-            CaptchaLen: 5,
-            MaxSkew: 0.7,
-            DotCount: 80
-          }
+          VerifyValue: ''
         }
       }
     },
