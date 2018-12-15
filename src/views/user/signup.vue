@@ -39,9 +39,10 @@
                   <el-input type="password" placeholder="请再次输入密码" v-model="signupValue.checkPassword"
                             autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="验证码" prop="verifyCode">
+                <el-form-item label="验证码">
                   <div class="verify">
-                    <el-input type="text" placeholder="请输入验证码" v-model="signupValue.verifyCode" autocomplete="off"></el-input>
+                    <el-input type="text" placeholder="请输入验证码" v-model="verifyForm.VerifyValue"
+                              autocomplete="off"></el-input>
                   </div>
                   <div class="verify">
                     <img :src="veridySrc" @click="generateCaptcha" alt="点我">
@@ -110,7 +111,7 @@
         } else {
           http.get('/api/user/usernameIsExists/' + value)
             .then(res => {
-              if (res.data.status == 0) {
+              if (res.data.status == 1) {
                 callback()
               } else {
                 callback(new Error("用户名已存在"))
@@ -155,6 +156,7 @@
         }
       };
       /*验证码校验*/
+      /* // base64验证码出于安全性的考虑，验证成功一次之后就会失效，所以表单自动校验规则暂不开启验证码校验，让API去校验
       var checkVerifyCode = (rule, value, callback) => {
         this.verifyForm.VerifyValue = value;
         http.post('/api/verify/verifyCaptcha', this.verifyForm)
@@ -166,20 +168,19 @@
             }
           })
       };
+      */
       return {
         signupValue: {
           username: '',
           password: '',
           checkPassword: '',
           email: '',
-          verifyCode: ''
         },
         rules2: {
           username: [{validator: validateUsername, trigger: 'blur', required: true}],
           password: [{validator: validatePassword, trigger: 'blur', required: true}],
           checkPassword: [{validator: validatePassword2, trigger: 'blur', required: true}],
-          email: [{validator: checkEmail, trigger: 'blur', required: true}],
-          verifyCode: [{validator: checkVerifyCode, trigger: 'blur', required: true}]
+          email: [{validator: checkEmail, trigger: 'blur', required: true}]
         },
         loading: true,
         veridySrc: "",
@@ -219,9 +220,18 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            http.post('/api/user', this.signupValue)
+            http.post('/api/user', {from: this.signupValue, verify: this.verifyForm})
               .then(res => {
                 console.log("res: ", res)
+                if (res.data.status == -1) {
+                  this.verifyForm.VerifyValue = "";
+                  this.$message.error('验证码错误');
+                } else if (res.data.status == 1) {
+                  // todo 存入vuex，待处理
+                  alert("注册成功");
+                } else {
+                  this.$message.error('网络错误, 请重试');
+                }
               })
               .catch(err => {
                 console.log("err1:", err)
@@ -239,7 +249,7 @@
       generateCaptcha() {
         http.post("/api/verify/getCaptcha", this.verifyForm)
           .then(res => {
-            if (res.data.status == 1){
+            if (res.data.status == 1) {
               this.verifyForm.Id = res.data.captchaId;
               this.veridySrc = res.data.data;
             } else {
@@ -290,7 +300,7 @@
   }
 
   .verify img {
-    height:50px;
+    height: 50px;
     width: 100%;
     margin-left: 5%;
   }
