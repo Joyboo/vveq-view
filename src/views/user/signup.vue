@@ -25,17 +25,29 @@
               <el-form :model="signupValue" status-icon :rules="rules2" size="mini" ref="signupValue"
                        label-width="100px" class="demo-ruleForm">
                 <el-form-item label="用户名" prop="username">
-                  <el-input type="text" v-model="signupValue.username" autocomplete="off"></el-input>
+                  <el-input type="text" placeholder="请输入用户名" v-model="signupValue.username"
+                            autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
-                  <el-input type="text" v-model="signupValue.email" autocomplete="off"></el-input>
+                  <el-input type="text" placeholder="请输入邮箱" v-model="signupValue.email" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
-                  <el-input type="password" v-model="signupValue.password" autocomplete="off"></el-input>
+                  <el-input type="password" placeholder="请输入密码" v-model="signupValue.password"
+                            autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="确认密码" prop="checkPassword">
-                  <el-input type="password" v-model="signupValue.checkPassword" autocomplete="off"></el-input>
+                  <el-input type="password" placeholder="请再次输入密码" v-model="signupValue.checkPassword"
+                            autocomplete="off"></el-input>
                 </el-form-item>
+                <el-form-item label="验证码" prop="verifyCode">
+                  <div class="verify">
+                    <el-input type="text" placeholder="请输入验证码" v-model="signupValue.verifyCode" autocomplete="off"></el-input>
+                  </div>
+                  <div class="verify">
+                    <img :src="veridySrc" @click="generateCaptcha" alt="点我">
+                  </div>
+                </el-form-item>
+
                 <el-form-item>
                   <el-button type="primary" @click="submitForm('signupValue')">提交</el-button>
                   <el-button @click="resetForm('signupValue')">重置</el-button>
@@ -82,10 +94,7 @@
         }).then(() => {
           next()
         }).catch(() => {
-          /*this.$message({
-            type: 'info',
-            message: '已取消'
-          });*/
+          this.$message.error('网络错误, 请重试');
         });
       } else {
         next()
@@ -145,20 +154,65 @@
           callback();
         }
       };
+      /*验证码校验*/
+      var checkVerifyCode = (rule, value, callback) => {
+        this.verifyForm.VerifyValue = value;
+        http.post('/api/verify/verifyCaptcha', this.verifyForm)
+          .then(res => {
+            if (res.data.status == 1) {
+              callback()
+            } else {
+              callback(new Error("验证失败"));
+            }
+          })
+      };
       return {
         signupValue: {
           username: '',
           password: '',
           checkPassword: '',
-          email: ''
+          email: '',
+          verifyCode: ''
         },
         rules2: {
           username: [{validator: validateUsername, trigger: 'blur', required: true}],
           password: [{validator: validatePassword, trigger: 'blur', required: true}],
           checkPassword: [{validator: validatePassword2, trigger: 'blur', required: true}],
-          email: [{validator: checkEmail, trigger: 'blur', required: true}]
+          email: [{validator: checkEmail, trigger: 'blur', required: true}],
+          verifyCode: [{validator: checkVerifyCode, trigger: 'blur', required: true}]
         },
-        loading: true
+        loading: true,
+        veridySrc: "",
+        verifyForm: {
+          CaptchaType: "character",
+          Id: '',
+          VerifyValue: '',
+          ConfigAudio: {
+            CaptchaLen: 6,
+            Language: 'zh'
+          },
+          ConfigCharacter: {
+            Height: 60,
+            Width: 240,
+            Mode: 2,
+            ComplexOfNoiseText: 0,
+            ComplexOfNoiseDot: 0,
+            IsUseSimpleFont: true,
+            IsShowHollowLine: false,
+            IsShowNoiseDot: false,
+            IsShowNoiseText: false,
+            IsShowSlimeLine: false,
+            IsShowSineLine: false,
+            CaptchaLen: 6
+          },
+          ConfigDigit: {
+            Height: 80,
+            Width: 240,
+            CaptchaLen: 5,
+            MaxSkew: 0.7,
+            DotCount: 80
+          }
+        }
       }
     },
     methods: {
@@ -180,7 +234,27 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      // 获取验证码
+      generateCaptcha() {
+        http.post("/api/verify/getCaptcha", this.verifyForm)
+          .then(res => {
+            if (res.data.status == 1){
+              this.verifyForm.Id = res.data.captchaId;
+              this.veridySrc = res.data.data;
+            } else {
+              console.log("data error: ", res);
+              this.$message.error('网络错误, 请重试');
+            }
+          })
+          .catch(err => {
+            console.log("generateCaptcha error: ", err);
+            this.$message.error('网络错误, 请重试');
+          })
       }
+    },
+    mounted() {
+      this.generateCaptcha()
     }
   }
 </script>
@@ -206,6 +280,23 @@
     margin: 0 auto;
     padding-right: 70px;
     text-align: left;
+  }
+
+  /*验证码*/
+  .verify {
+    width: 48%;
+    height: 50px;
+    float: left;
+  }
+
+  .verify img {
+    height:50px;
+    width: 100%;
+    margin-left: 5%;
+  }
+
+  .verify img:hover {
+    cursor: pointer;
   }
 
   /* 移动端 */
