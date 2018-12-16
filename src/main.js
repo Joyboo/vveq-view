@@ -9,12 +9,15 @@ import 'animate.css'
 import './assets/css/display.css'
 import './assets/css/font-awesome.min.css'
 
+import store from './store/index'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 })

@@ -77,6 +77,7 @@
   import layoutright from "../../components/layout/right"
   import layoutfooter from "../../components/layout/footer"
   import http from "../../util/http.js"
+  import {mapActions, mapState} from 'vuex'
 
   export default {
     name: "signup",
@@ -158,7 +159,6 @@
       /*验证码校验*/
       /* // base64验证码出于安全性的考虑，验证成功一次之后就会失效，所以表单自动校验规则暂不开启验证码校验，让API去校验
       var checkVerifyCode = (rule, value, callback) => {
-        this.verifyForm.VerifyValue = value;
         http.post('/api/verify/verifyCaptcha', this.verifyForm)
           .then(res => {
             if (res.data.status == 1) {
@@ -202,8 +202,9 @@
                   this.verifyForm.VerifyValue = "";
                   this.$message.error('验证码错误');
                 } else if (res.data.status == 1) {
-                  // todo 存入vuex，待处理
-                  alert("注册成功");
+                  res.data.data.isLogin = true;
+                  this.updateUserAction(res.data.data);
+                  this.$router.push({path: "/index"});
                 } else {
                   this.$message.error('网络错误, 请重试');
                 }
@@ -236,10 +237,16 @@
             console.log("generateCaptcha error: ", err);
             this.$message.error('网络错误, 请重试');
           })
-      }
+      },
+      ...mapActions(['updateUserAction']),
     },
     mounted() {
       this.generateCaptcha()
+    },
+    computed: {
+      ...mapState({
+        userInfo: state => state.userInfo,
+      })
     }
   }
 </script>

@@ -9,7 +9,7 @@
         <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
       </div>
       <div style="float: right;">
-        <ul v-if="!isLogin" class="head-item">
+        <ul v-if="!userInfo.isLogin" class="head-item">
           <li>
             <a href="javascript:;">首页</a>
           </li>
@@ -25,18 +25,27 @@
             </span>
           </li>
         </ul>
-        <ul v-else>
+        <ul v-else  class="head-item">
           <li>
-            <img :src="userInfo.authorimg" alt="">
+            <!--动态，收藏，点赞，积分-->
+            <el-dropdown :hide-on-click="false" show-timeout="0">
+              <span class="el-dropdown-link">
+                {{userInfo.username}}<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>我的动态</el-dropdown-item>
+                <el-dropdown-item>我的收藏</el-dropdown-item>
+                <el-dropdown-item>我点过赞</el-dropdown-item>
+                <el-dropdown-item disabled>我的积分</el-dropdown-item>
+                <el-dropdown-item divided>退出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </li>
           <li>
-            <img :src="userInfo.authorimg" alt="">
+            <router-link to="/">博客</router-link>
           </li>
           <li>
-            <img :src="userInfo.authorimg" alt="">
-          </li>
-          <li>
-            <img :src="userInfo.authorimg" alt="">
+            <router-link to="/">设置</router-link>
           </li>
           <li>
             <span @click="m_search_click" class="hidden-md-and-up login-search-icon">
@@ -61,15 +70,12 @@
 </template>
 
 <script>
+  import {mapActions, mapState} from 'vuex'
 
   export default {
     name: "layouthead",
     data() {
       return {
-        isLogin: false,
-        userInfo: {
-          authorimg: "http://images.boblog.com/msyql.jpg"
-        },
         m_isshowsearch: false,
         m_search_value: ""
       }
@@ -77,12 +83,15 @@
     methods: {
       m_search_click() {
         this.m_isshowsearch = !this.m_isshowsearch
-      }
+      },
     },
     computed: {
       m_searchicon() {
         return this.m_isshowsearch ? "el-icon-close" : "el-icon-search"
-      }
+      },
+      ...mapState({
+        userInfo: state => state.userInfo,
+      })
     }
   }
 </script>
@@ -101,7 +110,7 @@
     position: relative;
     display: block;
     float: left;
-    margin: 0 5px;
+    margin: 0 10px;
   }
 
   .head-container li img {
@@ -155,7 +164,7 @@
     font-weight: 500;
   }
 
-  .head-item a:hover {
+  .head-item li:hover {
     color: #409EFF;
   }
 
@@ -166,6 +175,11 @@
 
   .logo-red {
     color: #F56C6C;
+  }
+
+  /*head下拉菜单*/
+  .el-dropdown-link {
+    cursor: pointer;
   }
 
   /* 移动端 */

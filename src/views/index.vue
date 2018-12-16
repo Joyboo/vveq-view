@@ -214,7 +214,6 @@
       }
     },
     methods: {
-
       getTagName(tagid) {
         let tagname = this.tagsdata[tagid];
         return typeof (tagname) == 'undefined' ? "" : tagname;
@@ -223,6 +222,9 @@
         let nodename = this.nodedata[nodeid];
         return typeof (nodename) == 'undefined' ? "" : nodename;
       }
+    },
+    mounted() {
+      // todo 获取主页信息
     }
   }
 </script>

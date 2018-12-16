@@ -3,9 +3,10 @@
   <div id="right-container">
 
     <!--个人信息-->
-    <div v-if="isLogin" class="user-box right-body">
+    <div v-if="userInfo.isLogin" class="user-box right-body">
       <div class="right-title">
-        <i class="fa fa-user-circle"></i> 桃花源
+        <i class="fa fa-user-circle"></i>
+        桃花源
       </div>
       <!--头像+昵称-->
       <div>
@@ -45,7 +46,8 @@
     <!--登录-->
     <div v-else class="login-box right-body">
       <div class="right-title">
-        <i class="fa fa-user-circle"></i> 开启探索之旅吧！
+        <i class="fa fa-user-circle"></i>
+        开启探索之旅吧！
       </div>
       <div>
         <el-form :model="formInline" class="demo-form-inline">
@@ -70,17 +72,17 @@
         </span>
         <span>
           <el-tooltip class="item" effect="dark" content="QQ登录" placement="top">
-          <i class="fa fa-qq"></i>
+            <i class="fa fa-qq"></i>
           </el-tooltip>
         </span>
         <span>
           <el-tooltip class="item" effect="dark" content="微信登录" placement="top">
-          <i class="fa fa-weixin"></i>
+            <i class="fa fa-weixin"></i>
           </el-tooltip>
         </span>
         <span>
           <el-tooltip class="item" effect="dark" content="微博登录" placement="top">
-          <i class="fa fa-weibo"></i>
+            <i class="fa fa-weibo"></i>
           </el-tooltip>
         </span>
       </div>
@@ -89,72 +91,73 @@
     <!--最热-->
     <div id="right-hot" class="right-body">
       <div class="right-title">
-        <i class="fa fa-fire"></i> 最热
+        <i class="fa fa-fire"></i>
+        最热
       </div>
 
       <div>
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
           <tbody>
-          <tr>
-            <td>
-              <a href="javascript:;" class="hot-img">
-                <img src="http://images.boblog.com/msyql.jpg" alt="">
-              </a>
-            </td>
-            <td>
-              <div class="hot-item">
-                <div>
-                  <a href="javascript:;">
-                    这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
-                  </a>
+            <tr>
+              <td>
+                <a href="javascript:;" class="hot-img">
+                  <img src="http://images.boblog.com/msyql.jpg" alt="">
+                </a>
+              </td>
+              <td>
+                <div class="hot-item">
+                  <div>
+                    <a href="javascript:;">
+                      这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
+                    </a>
+                  </div>
+                  <div>
+                    <span class="hot-item-time">2018-10-29 12:09:00</span>
+                    <span class="hot-item-num">10评论</span>
+                  </div>
                 </div>
-                <div>
-                  <span class="hot-item-time">2018-10-29 12:09:00</span>
-                  <span class="hot-item-num">10评论</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="javascript:;" class="hot-img">
+                  <img src="http://images.boblog.com/msyql.jpg" alt="">
+                </a>
+              </td>
+              <td>
+                <div class="hot-item">
+                  <div>
+                    <a href="javascript:;">
+                      这是标题这是
+                    </a>
+                  </div>
+                  <div>
+                    <span class="hot-item-time">2018-10-29 12:09:00</span>
+                    <span class="hot-item-num">10评论</span>
+                  </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a href="javascript:;" class="hot-img">
-                <img src="http://images.boblog.com/msyql.jpg" alt="">
-              </a>
-            </td>
-            <td>
-              <div class="hot-item">
-                <div>
-                  <a href="javascript:;">
-                    这是标题这是
-                  </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="javascript:;" class="hot-img">
+                  <img src="http://images.boblog.com/msyql.jpg" alt="">
+                </a>
+              </td>
+              <td>
+                <div class="hot-item">
+                  <div>
+                    <a href="javascript:;">
+                      这是标题这是标题这是标题这是标
+                    </a>
+                  </div>
+                  <div>
+                    <span class="hot-item-time">2018-10-29 12:09:00</span>
+                    <span class="hot-item-num">10评论</span>
+                  </div>
                 </div>
-                <div>
-                  <span class="hot-item-time">2018-10-29 12:09:00</span>
-                  <span class="hot-item-num">10评论</span>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a href="javascript:;" class="hot-img">
-                <img src="http://images.boblog.com/msyql.jpg" alt="">
-              </a>
-            </td>
-            <td>
-              <div class="hot-item">
-                <div>
-                  <a href="javascript:;">
-                    这是标题这是标题这是标题这是标
-                  </a>
-                </div>
-                <div>
-                  <span class="hot-item-time">2018-10-29 12:09:00</span>
-                  <span class="hot-item-num">10评论</span>
-                </div>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -163,7 +166,8 @@
     <!--本站统计-->
     <div id="local-stat" class="right-body">
       <div class="right-title">
-        <i class="fa fa-signal"></i> 本站统计
+        <i class="fa fa-signal"></i>
+        本站统计
       </div>
 
       <div>
@@ -179,7 +183,8 @@
     <!--推荐-->
     <div id="recommend" class="right-body">
       <div class="right-title">
-        <i class="fa fa-flag"></i> 推荐
+        <i class="fa fa-flag"></i>
+        推荐
       </div>
     </div>
 
@@ -188,11 +193,13 @@
 </template>
 
 <script>
+  import {mapActions, mapState} from 'vuex'
+  import http from "../../util/http.js"
+
   export default {
     name: "layoutright",
     data() {
       return {
-        isLogin: false,
         formInline: {
           username: '',
           password: ''
@@ -201,8 +208,23 @@
     },
     methods: {
       onSubmit() {
-        alert('submit!');
-      }
+        http.post("/api/user/login", this.formInline)
+          .then(res => {
+            if (res.data.status == 1) {
+              res.data.data.isLogin = true;
+              this.updateUserAction(res.data.data);
+            } else {
+              this.formInline.username = this.formInline.password = "";
+              this.$message.error('登录失败');
+            }
+          })
+      },
+      ...mapActions(['updateUserAction']),
+    },
+    computed: {
+      ...mapState({
+        userInfo: state => state.userInfo,
+      })
     }
   }
 </script>
@@ -342,6 +364,7 @@
     color: #ccc;
     font-size: 10px;
   }
+
   .hot-item-num {
     color: #ccc;
     font-size: 10px;
