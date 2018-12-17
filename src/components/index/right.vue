@@ -17,7 +17,7 @@
         </div>
         <div style="width:60%;line-height:60px;overflow: hidden;padding: 0 10px;text-align: left;">
           <a href="javascripit:;">
-            Joyboo
+            {{userInfo.username}}
           </a>
         </div>
       </div>
@@ -51,8 +51,9 @@
       </div>
       <div>
         <el-form :model="formInline" class="demo-form-inline">
-          <el-input size="mini" name="username" v-model="formInline.username" placeholder="账号"></el-input>
-          <el-input size="mini" name="password" v-model="formInline.password" placeholder="密码"></el-input>
+          <el-input size="mini" type="text" name="username" v-model="formInline.username" placeholder="账号"></el-input>
+          <el-input size="mini" type="password" name="password" v-model="formInline.password"
+                    placeholder="密码"></el-input>
           <div class="login-button">
             <span>
               <el-button type="primary" size="mini" @click="onSubmit">登录</el-button>
@@ -98,66 +99,66 @@
       <div>
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
           <tbody>
-            <tr>
-              <td>
-                <a href="javascript:;" class="hot-img">
-                  <img src="http://images.boblog.com/msyql.jpg" alt="">
-                </a>
-              </td>
-              <td>
-                <div class="hot-item">
-                  <div>
-                    <a href="javascript:;">
-                      这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
-                    </a>
-                  </div>
-                  <div>
-                    <span class="hot-item-time">2018-10-29 12:09:00</span>
-                    <span class="hot-item-num">10评论</span>
-                  </div>
+          <tr>
+            <td>
+              <a href="javascript:;" class="hot-img">
+                <img src="http://images.boblog.com/msyql.jpg" alt="">
+              </a>
+            </td>
+            <td>
+              <div class="hot-item">
+                <div>
+                  <a href="javascript:;">
+                    这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题
+                  </a>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="javascript:;" class="hot-img">
-                  <img src="http://images.boblog.com/msyql.jpg" alt="">
-                </a>
-              </td>
-              <td>
-                <div class="hot-item">
-                  <div>
-                    <a href="javascript:;">
-                      这是标题这是
-                    </a>
-                  </div>
-                  <div>
-                    <span class="hot-item-time">2018-10-29 12:09:00</span>
-                    <span class="hot-item-num">10评论</span>
-                  </div>
+                <div>
+                  <span class="hot-item-time">2018-10-29 12:09:00</span>
+                  <span class="hot-item-num">10评论</span>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="javascript:;" class="hot-img">
-                  <img src="http://images.boblog.com/msyql.jpg" alt="">
-                </a>
-              </td>
-              <td>
-                <div class="hot-item">
-                  <div>
-                    <a href="javascript:;">
-                      这是标题这是标题这是标题这是标
-                    </a>
-                  </div>
-                  <div>
-                    <span class="hot-item-time">2018-10-29 12:09:00</span>
-                    <span class="hot-item-num">10评论</span>
-                  </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="javascript:;" class="hot-img">
+                <img src="http://images.boblog.com/msyql.jpg" alt="">
+              </a>
+            </td>
+            <td>
+              <div class="hot-item">
+                <div>
+                  <a href="javascript:;">
+                    这是标题这是
+                  </a>
                 </div>
-              </td>
-            </tr>
+                <div>
+                  <span class="hot-item-time">2018-10-29 12:09:00</span>
+                  <span class="hot-item-num">10评论</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="javascript:;" class="hot-img">
+                <img src="http://images.boblog.com/msyql.jpg" alt="">
+              </a>
+            </td>
+            <td>
+              <div class="hot-item">
+                <div>
+                  <a href="javascript:;">
+                    这是标题这是标题这是标题这是标
+                  </a>
+                </div>
+                <div>
+                  <span class="hot-item-time">2018-10-29 12:09:00</span>
+                  <span class="hot-item-num">10评论</span>
+                </div>
+              </div>
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -210,14 +211,14 @@
       onSubmit() {
         http.post("/api/user/login", this.formInline)
           .then(res => {
+            this.formInline.username = this.formInline.password = "";
             if (res.data.status == 1) {
               res.data.data.isLogin = true;
               this.updateUserAction(res.data.data);
             } else {
-              this.formInline.username = this.formInline.password = "";
               this.$message.error('登录失败');
             }
-          })
+          }).catch(err => console.log(err))
       },
       ...mapActions(['updateUserAction']),
     },

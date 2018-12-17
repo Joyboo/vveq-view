@@ -25,19 +25,19 @@
             </span>
           </li>
         </ul>
-        <ul v-else  class="head-item">
+        <ul v-else class="head-item">
           <li>
             <!--动态，收藏，点赞，积分-->
-            <el-dropdown :hide-on-click="false" show-timeout="0">
+            <el-dropdown :hide-on-click="false" show-timeout="0" @command="handleCommand">
               <span class="el-dropdown-link">
                 {{userInfo.username}}<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>我的动态</el-dropdown-item>
-                <el-dropdown-item>我的收藏</el-dropdown-item>
-                <el-dropdown-item>我点过赞</el-dropdown-item>
-                <el-dropdown-item disabled>我的积分</el-dropdown-item>
-                <el-dropdown-item divided>退出</el-dropdown-item>
+                <el-dropdown-item command="a">我的动态</el-dropdown-item>
+                <el-dropdown-item command="b">我的收藏</el-dropdown-item>
+                <el-dropdown-item command="c">我点过赞</el-dropdown-item>
+                <el-dropdown-item command="d" disabled>我的积分</el-dropdown-item>
+                <el-dropdown-item command="e" divided>退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </li>
@@ -84,6 +84,17 @@
       m_search_click() {
         this.m_isshowsearch = !this.m_isshowsearch
       },
+      handleCommand(command) {
+        switch (command) {
+          case "e" :
+            this.updateUserAction({});
+            this.$router.push({path: "/index"});
+            break;
+          default:
+            break;
+        }
+      },
+      ...mapActions(['updateUserAction']),
     },
     computed: {
       m_searchicon() {

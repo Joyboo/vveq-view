@@ -13,13 +13,13 @@ const state = {
     email: "",
     tel: "",
     avatar: "",
-    instime: ""
+    instime: 0
   }
 };
 
 const mutations = {
   // 修改用户信息
-  updateUserInfo (state, value) {
+  updateUserInfo(state, value) {
     state.userInfo = value
   }
 }

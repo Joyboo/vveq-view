@@ -80,7 +80,9 @@
       </el-container>
 
       <el-footer>
-        <layoutfooter><backtop></backtop></layoutfooter>
+        <layoutfooter>
+          <backtop></backtop>
+        </layoutfooter>
       </el-footer>
 
     </el-container>
@@ -90,7 +92,7 @@
 <script>
 
   import layouthead from "../components/layout/head"
-  import layoutright from "../components/layout/right"
+  import layoutright from "../components/index/right"
   import layoutfooter from "../components/layout/footer"
   import backtop from "../components/backTop"
 

@@ -59,7 +59,55 @@
 
           <!--右侧边栏-->
           <div id="right-body">
-            <layoutright></layoutright>
+
+            <div id="other-login" class="right-body">
+              <div class="right-title">
+                <i class="fa fa-user-circle"></i>
+                第三方登录
+              </div>
+
+              <div class="item">
+                <span>
+                  <el-tooltip class="item" effect="dark" content="Github登录" placement="top">
+                    <i class="fa fa-github"></i>
+                  </el-tooltip>
+                </span>
+                <span>
+                  <el-tooltip class="item" effect="dark" content="QQ登录" placement="top">
+                    <i class="fa fa-qq"></i>
+                  </el-tooltip>
+                </span>
+                <span>
+                  <el-tooltip class="item" effect="dark" content="微信登录" placement="top">
+                    <i class="fa fa-weixin"></i>
+                  </el-tooltip>
+                </span>
+                <span>
+                  <el-tooltip class="item" effect="dark" content="微博登录" placement="top">
+                    <i class="fa fa-weibo"></i>
+                  </el-tooltip>
+                </span>
+              </div>
+            </div>
+
+            <div id="right-login" class="right-body">
+              <div class="right-title">
+                <i class="fa fa-calendar"></i>
+                已有账号了？
+              </div>
+
+              <div class="item">
+                <ul>
+                  <li>
+                    <a href="javascript:;">登录</a>
+                  </li>
+                  <li>
+                    <a href="javascript:;">忘记密码</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
           </div>
         </div>
       </el-container>
@@ -74,7 +122,6 @@
 
 <script>
   import layouthead from "../../components/layout/head"
-  import layoutright from "../../components/layout/right"
   import layoutfooter from "../../components/layout/footer"
   import http from "../../util/http.js"
   import {mapActions, mapState} from 'vuex'
@@ -83,25 +130,24 @@
     name: "signup",
     components: {
       layouthead,
-      layoutright,
       layoutfooter,
     },
     // route离开事件
-    beforeRouteLeave(to, from, next) {
-      if (this.signupValue.username != '' || this.signupValue.email || this.signupValue.password) {
-        this.$confirm('检测到有未提交的内容, 确认要离开吗?', '请确认', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          next()
-        }).catch(() => {
-          this.$message.error('网络错误, 请重试');
-        });
-      } else {
-        next()
-      }
-    },
+    /* beforeRouteLeave(to, from, next) {
+       if (this.signupValue.username != '' || this.signupValue.email || this.signupValue.password) {
+         this.$confirm('检测到有未提交的内容, 确认要离开吗?', '请确认', {
+           confirmButtonText: '确定',
+           cancelButtonText: '取消',
+           type: 'warning'
+         }).then(() => {
+           next()
+         }).catch(() => {
+           this.$message.error('网络错误, 请重试');
+         });
+       } else {
+         next()
+       }
+     },*/
     data() {
       /*用户名验证规则*/
       var validateUsername = (rule, value, callback) => {
@@ -201,6 +247,7 @@
                 if (res.data.status == -1) {
                   this.verifyForm.VerifyValue = "";
                   this.$message.error('验证码错误');
+                  this.generateCaptcha();
                 } else if (res.data.status == 1) {
                   res.data.data.isLogin = true;
                   this.updateUserAction(res.data.data);
@@ -289,6 +336,47 @@
 
   .verify img:hover {
     cursor: pointer;
+  }
+
+  .right-title {
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    border-bottom: 1px solid #e2e2e2;
+    font-weight: 700;
+    padding-left: 10px;
+  }
+
+  .right-body {
+    background-color: #FFF;
+    margin-bottom: 10px;
+    clear: both;
+    padding-bottom: 1px;
+  }
+
+  #other-login > div:nth-child(2) {
+    clear: both;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  #other-login > div:nth-child(2) span {
+    color: #409EFF;
+    font-size: 25px;
+    margin: 0 15px;
+    width: 12%;
+  }
+
+  #other-login > div:nth-child(2) a:hover {
+    cursor: pointer;
+    color: #556;
+  }
+
+  #right-login a:hover {
+    text-decoration: underline;
   }
 
   /* 移动端 */
