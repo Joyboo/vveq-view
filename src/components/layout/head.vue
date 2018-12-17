@@ -28,7 +28,7 @@
         <ul v-else class="head-item">
           <li>
             <!--动态，收藏，点赞，积分-->
-            <el-dropdown :hide-on-click="false" show-timeout="0" @command="handleCommand">
+            <el-dropdown @command="handleCommand" trigger="click">
               <span class="el-dropdown-link">
                 {{userInfo.username}}<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
