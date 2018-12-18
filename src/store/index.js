@@ -5,22 +5,14 @@ Vue.use(Vuex);
 
 const state = {
   // 用户详情
-  userInfo: {
-    isLogin: false,
-    id: 0,
-    username: "",
-    nickname: "",
-    email: "",
-    tel: "",
-    avatar: "",
-    instime: 0
-  }
+  userInfo: JSON.parse(window.localStorage.getItem("userInfo")) || {}
 };
 
 const mutations = {
   // 修改用户信息
   updateUserInfo(state, value) {
-    state.userInfo = value
+    window.localStorage.setItem("userInfo", JSON.stringify(value));
+    state.userInfo = value;
   }
 }
 
