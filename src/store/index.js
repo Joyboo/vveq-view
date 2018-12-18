@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 const state = {
   // 用户详情
-  userInfo: JSON.parse(window.localStorage.getItem("userInfo")) || {}
+  userInfo: JSON.parse(window.localStorage.getItem("userInfo") || '{"isLogin":false}')
 };
 
 const mutations = {
