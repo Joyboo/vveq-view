@@ -88,6 +88,7 @@
         switch (command) {
           case "e" :
             this.updateUserAction({});
+            window.localStorage.removeItem("userInfo")
             this.$router.push({path: "/index"});
             break;
           default:
