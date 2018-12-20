@@ -1,107 +1,90 @@
 <template>
-  <div id="app">
-    <el-container>
 
-      <!--头部-->
-      <el-header>
-        <layouthead></layouthead>
-      </el-header>
+  <layoutindex>
 
-      <el-container>
-        <div class="index-container">
+    <template slot="layoutbody">
+      <div class="father-blog-item">
+        <!--第一个div显示节点-->
+        <div class="blog-item-head">
+          <span class="blog-cate blo-cate-active">全部</span>
+          <span class="blog-cate">最新</span>
+          <span class="blog-cate" v-for="(nv, nk) of nodedata" :key="nk">{{nv}}</span>
+        </div>
 
-          <!--body-->
-          <div id="index-body">
-            <div class="father-blog-item">
-              <!--第一个div显示节点-->
-              <div class="blog-item-head">
-                <span class="blog-cate blo-cate-active">全部</span>
-                <span class="blog-cate">最新</span>
-                <span class="blog-cate" v-for="(nv, nk) of nodedata" :key="nk">{{nv}}</span>
-              </div>
+        <!--帖子父级div-->
+        <div class="blog-item" v-for="(value, k) of itemdata" :key="k">
+          <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+            <tr>
+              <!--头像td-->
+              <td width="48" valign="top" align="center">
+                <a href="javascript:;">
+                  <img :src="value.authorimg" class="avatar" width="48px" height="48">
+                </a>
+              </td>
 
-              <!--帖子父级div-->
-              <div class="blog-item" v-for="(value, k) of itemdata" :key="k">
-                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                  <tbody>
-                  <tr>
-                    <!--头像td-->
-                    <td width="48" valign="top" align="center">
-                      <a href="javascript:;">
-                        <img :src="value.authorimg" class="avatar" width="48px" height="48">
-                      </a>
-                    </td>
-
-                    <td width="10"></td>
-                    <!--帖子td-->
-                    <td width="auto">
-                      <div style="min-height: 50px;">
-                        <!--标题-->
-                        <div class="item-title">
-                          <a href="javascript:;">{{value.title}}</a>
-                        </div>
-                        <!--节点和发布者，标签, 发布时间 todo 换成XX天小时前这种格式-->
-                        <div class="item-other">
+              <td width="10"></td>
+              <!--帖子td-->
+              <td width="auto">
+                <div style="min-height: 50px;">
+                  <!--标题-->
+                  <div class="item-title">
+                    <a href="javascript:;">{{value.title}}</a>
+                  </div>
+                  <!--节点和发布者，标签, 发布时间 todo 换成XX天小时前这种格式-->
+                  <div class="item-other">
                               <span v-if="!(value.tagid == 0)">
                                 <span class="item-tags" v-text="getTagName(value.tagid)"></span> &nbsp;•&nbsp;
                               </span>
-                          <a class="item-node" href="javascript:;" v-text="getItemNodeName(value.nodeid)"></a> &nbsp;•&nbsp;
-                          <b><a class="item-author" href="javascript:;">{{value.name}}</a></b> &nbsp;•&nbsp;
-                          <span>{{value.updateTime}}</span>
-                        </div>
-                      </div>
-                    </td>
+                    <a class="item-node" href="javascript:;" v-text="getItemNodeName(value.nodeid)"></a> &nbsp;•&nbsp;
+                    <b><a class="item-author" href="javascript:;">{{value.name}}</a></b> &nbsp;•&nbsp;
+                    <span>{{value.updateTime}}</span>
+                  </div>
+                </div>
+              </td>
 
-                    <!--数量提示-->
-                    <td width="50" align="center">
-                      <a href="javascript:;">
-                        <el-badge class="mark" type="info" :value="value.commentNum"/>
-                      </a>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
-
-            <!--分页-->
-            <div id="body-pages">
-              <el-pagination background layout="prev, pager, next" :total="80">
-              </el-pagination>
-            </div>
-          </div>
-
-          <!--右侧边栏-->
-          <div id="right-body">
-            <layoutright></layoutright>
-          </div>
+              <!--数量提示-->
+              <td width="50" align="center">
+                <a href="javascript:;">
+                  <el-badge class="mark" type="info" :value="value.commentNum"/>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
-      </el-container>
 
-      <el-footer>
-        <layoutfooter>
-          <backtop></backtop>
-        </layoutfooter>
-      </el-footer>
+      </div>
 
-    </el-container>
-  </div>
+      <!--分页-->
+      <div id="body-pages">
+        <el-pagination background layout="prev, pager, next" :total="80">
+        </el-pagination>
+      </div>
+    </template>
+
+    <template slot="layoutright">
+      <layoutright></layoutright>
+    </template>
+
+    <template slot="backTop">
+      <backtop></backtop>
+    </template>
+  </layoutindex>
+
 </template>
 
 <script>
 
-  import layouthead from "../components/layout/head"
+  import layoutindex from "../components/layout/index"
   import layoutright from "../components/index/right"
-  import layoutfooter from "../components/layout/footer"
   import backtop from "../components/backTop"
 
   export default {
     name: "index",
     components: {
-      layouthead,
+      layoutindex,
       layoutright,
-      layoutfooter,
       backtop
     },
     data() {
@@ -363,64 +346,18 @@
 
   /* 移动端 */
   @media only screen and (max-width: 1199px) {
-    .index-container {
-      width: 100%;
-      margin: 0 auto;
-    }
 
     .item-title {
       font-size: 15px;
-    }
-
-    #index-body {
-      width: 100%;
-    }
-
-    #right-body {
-      width: 100%;
     }
   }
 
   /* pc端(小屏) */
   @media only screen and (min-width: 1200px) {
-    .index-container {
-      width: 80%;
-      margin: 0 auto;
-    }
-
-    #index-body {
-      width: 73%;
-      margin-right: 10px;
-    }
-
-    #right-body {
-      width: 25%;
-    }
-
-    #index-body, #right-body {
-      float: left;
-    }
   }
 
   /* pc端(大屏) */
   @media only screen and (min-width: 1920px) {
-    .index-container {
-      width: 70%;
-      margin: 0 auto;
-    }
-
-    #index-body {
-      width: 73%;
-      margin-right: 10px;
-    }
-
-    #right-body {
-      width: 25%;
-    }
-
-    #index-body, #right-body {
-      float: left;
-    }
   }
 
 </style>
