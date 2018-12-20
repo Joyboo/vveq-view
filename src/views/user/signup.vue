@@ -1,136 +1,114 @@
 <template>
-  <div id="signup">
-    <el-container>
 
-      <!--头部-->
-      <el-header>
-        <layouthead></layouthead>
-      </el-header>
+  <layoutindex>
 
-      <el-container>
-        <div class="index-container">
+    <template slot="layoutbody">
+      <!--导航面包屑-->
+      <div class="guide">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>注册</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
 
-          <!--body-->
-          <div id="index-body">
-            <!--导航面包屑-->
-            <div class="guide">
-              <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>注册</el-breadcrumb-item>
-              </el-breadcrumb>
+      <!--表单项-->
+      <div id="signup-form">
+        <el-form :model="signupValue" status-icon :rules="rules2" size="mini" ref="signupValue"
+                 label-width="100px" class="demo-ruleForm">
+          <el-form-item label="用户名" prop="username">
+            <el-input type="text" placeholder="请输入用户名" v-model="signupValue.username"
+                      autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱" prop="email">
+            <el-input type="text" placeholder="请输入邮箱" v-model="signupValue.email" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input type="password" placeholder="请输入密码" v-model="signupValue.password"
+                      autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="确认密码" prop="checkPassword">
+            <el-input type="password" placeholder="请再次输入密码" v-model="signupValue.checkPassword"
+                      autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="验证码">
+            <div class="verify">
+              <el-input type="text" placeholder="请输入验证码" v-model="verifyForm.VerifyValue"
+                        autocomplete="off"></el-input>
             </div>
-
-            <!--表单项-->
-            <div id="signup-form">
-              <el-form :model="signupValue" status-icon :rules="rules2" size="mini" ref="signupValue"
-                       label-width="100px" class="demo-ruleForm">
-                <el-form-item label="用户名" prop="username">
-                  <el-input type="text" placeholder="请输入用户名" v-model="signupValue.username"
-                            autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                  <el-input type="text" placeholder="请输入邮箱" v-model="signupValue.email" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="password">
-                  <el-input type="password" placeholder="请输入密码" v-model="signupValue.password"
-                            autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="确认密码" prop="checkPassword">
-                  <el-input type="password" placeholder="请再次输入密码" v-model="signupValue.checkPassword"
-                            autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="验证码">
-                  <div class="verify">
-                    <el-input type="text" placeholder="请输入验证码" v-model="verifyForm.VerifyValue"
-                              autocomplete="off"></el-input>
-                  </div>
-                  <div class="verify">
-                    <img :src="veridySrc" @click="generateCaptcha" alt="点我">
-                  </div>
-                </el-form-item>
-
-                <el-form-item>
-                  <el-button type="primary" @click="submitForm('signupValue')">提交</el-button>
-                  <el-button @click="resetForm('signupValue')">重置</el-button>
-                </el-form-item>
-              </el-form>
+            <div class="verify">
+              <img :src="veridySrc" @click="generateCaptcha" alt="点我">
             </div>
-          </div>
+          </el-form-item>
 
-          <!--右侧边栏-->
-          <div id="right-body">
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('signupValue')">提交</el-button>
+            <el-button @click="resetForm('signupValue')">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </template>
 
-            <div id="other-login" class="right-body">
-              <div class="right-title">
-                <i class="fa fa-user-circle"></i>
-                第三方登录
-              </div>
+    <template slot="layoutright">
+      <div id="other-login" class="right-body">
+        <div class="right-title">
+          <i class="fa fa-user-circle"></i>
+          第三方登录
+        </div>
 
-              <div class="item">
+        <div class="item">
                 <span>
                   <el-tooltip class="item" effect="dark" content="Github登录" placement="top">
                     <i class="fa fa-github"></i>
                   </el-tooltip>
                 </span>
-                <span>
+          <span>
                   <el-tooltip class="item" effect="dark" content="QQ登录" placement="top">
                     <i class="fa fa-qq"></i>
                   </el-tooltip>
                 </span>
-                <span>
+          <span>
                   <el-tooltip class="item" effect="dark" content="微信登录" placement="top">
                     <i class="fa fa-weixin"></i>
                   </el-tooltip>
                 </span>
-                <span>
+          <span>
                   <el-tooltip class="item" effect="dark" content="微博登录" placement="top">
                     <i class="fa fa-weibo"></i>
                   </el-tooltip>
                 </span>
-              </div>
-            </div>
-
-            <div id="right-login" class="right-body">
-              <div class="right-title">
-                <i class="fa fa-calendar"></i>
-                已有账号了？
-              </div>
-
-              <div class="item">
-                <ul>
-                  <li>
-                    <a href="javascript:;">登录</a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">忘记密码</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-          </div>
         </div>
-      </el-container>
+      </div>
 
-      <el-footer>
-        <layoutfooter></layoutfooter>
-      </el-footer>
+      <div id="right-login" class="right-body">
+        <div class="right-title">
+          <i class="fa fa-calendar"></i>
+          已有账号了？
+        </div>
 
-    </el-container>
-  </div>
+        <div class="item">
+          <ul>
+            <li>
+              <a href="javascript:;">登录</a>
+            </li>
+            <li>
+              <a href="javascript:;">忘记密码</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </template>
+  </layoutindex>
 </template>
 
 <script>
-  import layouthead from "../../components/layout/head"
-  import layoutfooter from "../../components/layout/footer"
+  import layoutindex from "../../components/layout/index"
   import http from "../../util/http.js"
   import {mapActions, mapState} from 'vuex'
 
   export default {
     name: "signup",
     components: {
-      layouthead,
-      layoutfooter,
+      layoutindex
     },
     // route离开事件
     /* beforeRouteLeave(to, from, next) {
@@ -243,7 +221,6 @@
           if (valid) {
             http.post('/api/user', {from: this.signupValue, verify: this.verifyForm})
               .then(res => {
-                console.log("res: ", res)
                 if (res.data.status == -1) {
                   this.verifyForm.VerifyValue = "";
                   this.$message.error('验证码错误');
@@ -260,7 +237,7 @@
                 console.log("err1:", err)
               });
           } else {
-            this.$message.error('网络错误, 请重试');
+            this.$message.error('注册信息有误, 请检查');
             return false;
           }
         });
@@ -381,18 +358,6 @@
 
   /* 移动端 */
   @media only screen and (max-width: 1199px) {
-    .index-container {
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    #index-body {
-      width: 100%;
-    }
-
-    #right-body {
-      width: 100%;
-    }
 
     #signup-form {
       background-color: #FFF;
@@ -409,43 +374,9 @@
 
   /* pc端(小屏) */
   @media only screen and (min-width: 1200px) {
-    .index-container {
-      width: 80%;
-      margin: 0 auto;
-    }
-
-    #index-body {
-      width: 73%;
-      margin-right: 10px;
-    }
-
-    #right-body {
-      width: 25%;
-    }
-
-    #index-body, #right-body {
-      float: left;
-    }
   }
 
   /* pc端(大屏) */
   @media only screen and (min-width: 1920px) {
-    .index-container {
-      width: 70%;
-      margin: 0 auto;
-    }
-
-    #index-body {
-      width: 73%;
-      margin-right: 10px;
-    }
-
-    #right-body {
-      width: 25%;
-    }
-
-    #index-body, #right-body {
-      float: left;
-    }
   }
 </style>

@@ -25,7 +25,9 @@
       <div>
         <el-row>
 
-          <el-button size="small" type="primary" icon="el-icon-edit">发表主题</el-button>
+          <router-link to="/theme/add">
+            <el-button size="small" type="primary" icon="el-icon-edit">发表主题</el-button>
+          </router-link>
           <!--hidden属性隐藏-->
           <el-badge :value="3" class="item">
             <el-button size="small" type="warning" icon="el-icon-message">我的消息</el-button>

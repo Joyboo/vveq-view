@@ -135,8 +135,6 @@
 
   /* 登录状态的搜索图标 */
   .login-search-icon {
-    position: relative;
-    top: -14px;
     font-size: 20px;
   }
 
