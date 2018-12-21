@@ -79,4 +79,21 @@
     color: white;
   }
 
+  /*********公共CSS********/
+  .right-body {
+    background-color: #FFF;
+    margin-bottom: 10px;
+    clear: both;
+    padding-bottom: 1px;
+  }
+
+  .right-title {
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    border-bottom: 1px solid #e2e2e2;
+    font-weight: 700;
+    padding-left: 10px;
+  }
+
 </style>

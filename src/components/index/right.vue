@@ -12,7 +12,7 @@
       <div>
         <div style="float:left;width: 50px;height:50px;padding: 5px">
           <a href="javascript:;">
-            <img src="https://avatars1.githubusercontent.com/u/35485279?s=460&v=4" alt="">
+            <img :src="userInfo.avatar != '' ? userInfo.avatar : '/static/default.jpg'" alt="">
           </a>
         </div>
         <div style="width:60%;line-height:60px;overflow: hidden;padding: 0 10px;text-align: left;">
@@ -32,15 +32,6 @@
           <el-badge :value="3" class="item">
             <el-button size="small" type="warning" icon="el-icon-message">我的消息</el-button>
           </el-badge>
-          <!--<el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
-            <el-button size="small" disabled type="success" icon="el-icon-check" circle></el-button>
-          </el-tooltip>
-          <el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
-            <el-button size="small" disabled type="info" icon="el-icon-star-off" circle></el-button>
-          </el-tooltip>
-          <el-tooltip class="item" effect="dark" content="敬请期待" placement="top">
-            <el-button size="small" disabled type="danger" icon="el-icon-delete" circle></el-button>
-          </el-tooltip>-->
         </el-row>
       </div>
     </div>
@@ -225,6 +216,10 @@
       ...mapActions(['updateUserAction']),
     },
     computed: {
+      // 如果没设置头像，显示默认的头像
+      avatar () {
+        return this.userInfo.avatar ? this.userInfo.avatar : ""
+      },
       ...mapState({
         userInfo: state => state.userInfo,
       })

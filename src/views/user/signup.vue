@@ -315,22 +315,6 @@
     cursor: pointer;
   }
 
-  .right-title {
-    height: 35px;
-    line-height: 35px;
-    font-size: 14px;
-    border-bottom: 1px solid #e2e2e2;
-    font-weight: 700;
-    padding-left: 10px;
-  }
-
-  .right-body {
-    background-color: #FFF;
-    margin-bottom: 10px;
-    clear: both;
-    padding-bottom: 1px;
-  }
-
   #other-login > div:nth-child(2) {
     clear: both;
     display: flex;

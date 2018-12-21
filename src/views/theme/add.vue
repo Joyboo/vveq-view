@@ -1,28 +1,252 @@
 <template>
-    <layoutindex>
+  <layoutindex>
 
-      <template slot="layoutbody">
-        <div style="width: 100%;height:200px;border:1px solid red;"></div>
-      </template>
+    <template slot="layoutbody">
 
-      <template slot="layoutright">
-        <div style="width: 100%;height:200px;border:1px solid green;"></div>
-      </template>
+      <div id="add-body">
+        <!--导航面包屑-->
+        <div class="guide">
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>发表主题</el-breadcrumb-item>
+          </el-breadcrumb>
+        </div>
 
-    </layoutindex>
+        <div id="add-body-el">
+          <el-form :model="themeform" :rules="addrule" ref="themeform" class="demo-form-inline">
+            <div class="add-body-item">
+              <div class="add-body-title-label">标题</div>
+
+              <div class="add-body-title-input">
+                <el-form-item prop="title">
+                  <el-input size="mini" type="text" placeholder="请输入标题"
+                            v-model="themeform.title" autocomplete="off"></el-input>
+                </el-form-item>
+              </div>
+            </div>
+
+            <div class="add-body-item">
+              <div class="add-body-title-label">正文</div>
+
+              <div>
+                <el-form-item prop="mkvalue">
+                  <mavon-editor :toolbars="toolbars" :subfield="toolbars.issubfield" v-model="themeform.mkvalue"/>
+                </el-form-item>
+              </div>
+            </div>
+
+            <div class="add-body-item add-body-item-diff">
+              <div>
+                <el-form-item label="选择分类" prop="cate">
+                  <el-select v-model="themeform.cate" placeholder="请选择分类">
+                    <el-option label="分类一" value="1"></el-option>
+                    <el-option label="分类二" value="2"></el-option>
+                  </el-select>
+                </el-form-item>
+              </div>
+            </div>
+
+            <div class="add-body-item add-body-item-diff">
+            <span>
+              <el-button type="primary" size="mini" @click="submitForm('themeform')">提交</el-button>
+            </span>
+            </div>
+          </el-form>
+        </div>
+      </div>
+
+    </template>
+
+    <template slot="layoutright">
+      <div id="theme-tip" class="right-body">
+        <div class="right-title">
+          <i class="fa fa-question-circle"></i>
+          分发帖提示
+        </div>
+
+        <div class="add-right">
+          <div>这是发帖提示</div>
+          <div>这是发帖提示</div>
+          <div>这是发帖提示</div>
+          <div>这是发帖提示</div>
+          <div>这是发帖提示</div>
+        </div>
+      </div>
+    </template>
+
+  </layoutindex>
 </template>
 
 <script>
   import layoutindex from "../../components/layout/index"
+  import 'mavon-editor/dist/css/index.css'
+
 
   export default {
     name: "add",
     components: {
       layoutindex
+    },
+    data() {
+      let validateTitle = (rule, value, callback) => {
+        if (value.trim() === '') {
+          this.$message.error("请输入标题");
+        } else {
+          callback();
+        }
+      };
+      let validateMkvalue = (rule, value, callback) => {
+        if (value.trim() === '') {
+          this.$message.error("请输入内容");
+        } else {
+          callback();
+        }
+      };
+      let validateCate = (rule, value, callback) => {
+        if (value == '' || value <= 0) {
+          this.$message.error("请选择分类");
+        } else {
+          callback();
+        }
+      };
+      return {
+        themeform: {
+          title: "",
+          cate: "",
+          mkvalue: "",
+        },
+        addrule: {
+          title: [{validator: validateTitle, trigger: 'blur', required: true}],
+          mkvalue: [{validator: validateMkvalue, trigger: 'blur', required: true}],
+          cate: [{validator: validateCate, trigger: 'change', required: true}],
+        },
+        toolbars: {
+          bold: true, // 粗体
+          italic: true, // 斜体
+          header: true, // 标题
+          underline: true, // 下划线
+          strikethrough: true, // 中划线
+          mark: true, // 标记
+          superscript: true, // 上角标
+          subscript: true, // 下角标
+          quote: true, // 引用
+          ol: true, // 有序列表
+          ul: true, // 无序列表
+          link: true, // 链接
+          imagelink: true, // 图片链接
+          code: true, // code
+          table: true, // 表格
+          fullscreen: true, // 全屏编辑
+          readmodel: true, // 沉浸式阅读
+          htmlcode: true, // 展示html源码
+          help: true, // 帮助
+          /* 1.3.5 */
+          undo: true, // 上一步
+          redo: true, // 下一步
+          trash: true, // 清空
+          save: true, // 保存（触发events中的save事件）
+          /* 1.4.2 */
+          navigation: true, // 导航目录
+          /* 2.1.8 */
+          alignleft: true, // 左对齐
+          aligncenter: true, // 居中
+          alignright: true, // 右对齐
+          /* 2.2.1 */
+          subfield: true, // 单双栏模式
+          preview: true, // 预览
+          ishljs: true, // 代码高亮
+          /* 自定义 */
+          issubfield: false, // 双栏模式
+        }
+      }
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          console.log("valid: ", valid);
+          if (valid) {
+            this.$message.success("提交成功了");
+            return false;
+          } else {
+            this.$message.error('信息有误, 请检查');
+            return false;
+          }
+        });
+      }
     }
   }
 </script>
 
-<style scoped>
+<style>
+  #add-body {
+    background-color: #FFF;
+    border-radius: 3px;
+  }
 
+  .guide {
+    height: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  #add-body-el {
+    /*padding: 10px;*/
+  }
+
+  #add-body-el .el-form-item {
+    margin: 0;
+  }
+
+  #add-body-el .el-input__inner {
+    border: none;
+  }
+
+  .add-body-item {
+    width: 100%;
+    margin: 0 auto;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  .add-body-item-diff {
+    padding: 10px;
+  }
+
+  .add-body-item .el-input--suffix {
+    border: 1px solid #e2e2e2;
+  }
+
+  .add-body-title-label {
+    width: 100%;
+    border-bottom: 1px solid #e2e2e2;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .add-body-title-input .el-form-item__content {
+    line-height: 38px;
+  }
+
+  .add-body-title-input .el-input__inner {
+    width: 100%;
+    height: 40px;
+    border-bottom: 10px;
+    background-color: #F9F9EE;
+    font-size: 15px;
+    border: none;
+  }
+
+  /*修改markdoen编辑器的样式*/
+  .add-body-item .v-note-op {
+    border-bottom: 1px solid #e2e2e2 !important;
+    box-shadow: none !important;
+  }
+
+  .add-body-item .v-note-panel {
+    box-shadow: none !important;
+  }
+
+  .add-right {
+    padding: 10px;
+    font-size: 13px;
+  }
 </style>
