@@ -229,12 +229,6 @@
 
 <style>
 
-  .right-body {
-    background-color: #FFF;
-    margin-bottom: 10px;
-    clear: both;
-  }
-
   /*body分页*/
   #body-pages .el-pager li, #body-pages button {
     background: #fff;
@@ -251,16 +245,6 @@
   }
 
   /*登录框*/
-
-  /*right-title*/
-  .right-title {
-    height: 35px;
-    line-height: 35px;
-    font-size: 14px;
-    border-bottom: 1px solid #e2e2e2;
-    font-weight: 700;
-    padding-left: 10px;
-  }
 
   .login-box > div:nth-child(2) {
     border-bottom: 1px solid #e2e2e2;

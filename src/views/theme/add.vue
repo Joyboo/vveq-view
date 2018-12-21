@@ -15,12 +15,15 @@
         <div id="add-body-el">
           <el-form :model="themeform" :rules="addrule" ref="themeform" class="demo-form-inline">
             <div class="add-body-item">
-              <div class="add-body-title-label">标题</div>
+              <div class="add-body-title-label">
+                <span>标题</span>
+                <span class="title-length">{{titleAvabledLength}}</span>
+              </div>
 
               <div class="add-body-title-input">
                 <el-form-item prop="title">
                   <el-input size="mini" type="text" placeholder="请输入标题"
-                            v-model="themeform.title" autocomplete="off"></el-input>
+                            v-model="themeform.title" maxlength="100" autocomplete="off"></el-input>
                 </el-form-item>
               </div>
             </div>
@@ -103,6 +106,7 @@
         }
       };
       let validateCate = (rule, value, callback) => {
+        console.log(rule);
         if (value == '' || value <= 0) {
           this.$message.error("请选择分类");
         } else {
@@ -120,6 +124,7 @@
           mkvalue: [{validator: validateMkvalue, trigger: 'blur', required: true}],
           cate: [{validator: validateCate, trigger: 'change', required: true}],
         },
+        titleAvabledLength: 100,
         toolbars: {
           bold: true, // 粗体
           italic: true, // 斜体
@@ -163,8 +168,8 @@
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
-          console.log("valid: ", valid);
           if (valid) {
+            console.log("themeform: ", this.themeform);
             this.$message.success("提交成功了");
             return false;
           } else {
@@ -172,6 +177,12 @@
             return false;
           }
         });
+      }
+    },
+    watch: {
+      // 侦听器，监听title长度
+      'themeform.title' (newValue, oldValue) {
+        this.titleAvabledLength = this.themeform.title.length > 100 ? 0 : (100 - this.themeform.title.length)
       }
     }
   }
@@ -216,7 +227,6 @@
   }
 
   .add-body-title-label {
-    width: 100%;
     border-bottom: 1px solid #e2e2e2;
     padding: 10px;
     font-size: 14px;
@@ -248,5 +258,10 @@
   .add-right {
     padding: 10px;
     font-size: 13px;
+  }
+
+  .title-length {
+    float: right;
+    color: #ccc;
   }
 </style>
