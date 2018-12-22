@@ -64,7 +64,7 @@
     </template>
 
     <template slot="layoutright">
-      <layoutright></layoutright>
+      <right></right>
     </template>
 
     <template slot="backTop">
@@ -78,14 +78,14 @@
 <script>
 
   import layoutindex from "../components/layout/index"
-  import layoutright from "../components/index/right"
+  import right from "../components/index/right"
   import backtop from "../components/backTop"
 
   export default {
     name: "index",
     components: {
       layoutindex,
-      layoutright,
+      right,
       backtop
     },
     data() {

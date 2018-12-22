@@ -191,7 +191,7 @@
   import http from "../../util/http.js"
 
   export default {
-    name: "layoutright",
+    name: "right",
     data() {
       return {
         formInline: {

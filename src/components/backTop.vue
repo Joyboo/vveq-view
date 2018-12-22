@@ -23,9 +23,9 @@
         // 每次移动距离
         let offset = parseInt(scrolled / num);
         // 总消耗时间(毫秒)
-        let time = 200
+        let time = 200;
         // 定时器间隔时间
-        let o = parseInt(time / num)
+        let o = parseInt(time / num);
 
         let backVal = setInterval(() => {
           let s = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;

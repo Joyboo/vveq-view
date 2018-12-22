@@ -128,7 +128,7 @@
      },*/
     data() {
       /*用户名验证规则*/
-      var validateUsername = (rule, value, callback) => {
+      let validateUsername = (rule, value, callback) => {
         if (value === '' || value.length <= 0) {
           callback(new Error('请输入用户名'));
         } else if (!(/^[a-zA-Z_\d]{4,20}$/.test(value))) {
@@ -148,7 +148,7 @@
         }
       };
       /*首次密码验证规则*/
-      var validatePassword = (rule, value, callback) => {
+      let validatePassword = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
         } else if (value.length < 6) {
@@ -161,7 +161,7 @@
         }
       };
       /*确认密码验证规则*/
-      var validatePassword2 = (rule, value, callback) => {
+      let validatePassword2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
         } else if (value !== this.signupValue.password) {
@@ -171,7 +171,7 @@
         }
       };
       /*邮箱验证规则*/
-      var checkEmail = (rule, value, callback) => {
+      let checkEmail = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入邮箱'));
         } else if (!(/^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(\.[A-Za-z]+)+$/.test(value))) {
@@ -182,7 +182,7 @@
       };
       /*验证码校验*/
       /* // base64验证码出于安全性的考虑，验证成功一次之后就会失效，所以表单自动校验规则暂不开启验证码校验，让API去校验
-      var checkVerifyCode = (rule, value, callback) => {
+      let checkVerifyCode = (rule, value, callback) => {
         http.post('/api/verify/verifyCaptcha', this.verifyForm)
           .then(res => {
             if (res.data.status == 1) {
@@ -269,7 +269,7 @@
     },
     computed: {
       ...mapState({
-        userInfo: state => state.userInfo,
+        userInfo: state => state.userInfo
       })
     }
   }

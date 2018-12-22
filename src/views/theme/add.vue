@@ -64,7 +64,7 @@
       <div id="theme-tip" class="right-body">
         <div class="right-title">
           <i class="fa fa-question-circle"></i>
-          分发帖提示
+          发帖提示
         </div>
 
         <div class="add-right">
@@ -92,6 +92,9 @@
     },
     data() {
       let validateTitle = (rule, value, callback) => {
+        console.log(rule);
+        console.log(value);
+        console.log(callback);
         if (value.trim() === '') {
           this.$message.error("请输入标题");
         } else {
@@ -161,7 +164,7 @@
           preview: true, // 预览
           ishljs: true, // 代码高亮
           /* 自定义 */
-          issubfield: false, // 双栏模式
+          issubfield: false // 双栏模式
         }
       }
     },
