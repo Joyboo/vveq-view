@@ -27,15 +27,21 @@ Util.ajax.interceptors.response.use(
 
 export default {
   post(url, params = {}) {
+    let header = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+
+    if (typeof(params.header) != 'undefined')
+    {
+      header = params.header;
+      delete params.header;
+    }
+
     return Util.ajax({
       method: 'post',
       url: url,
       data: params,
       timeout: 30000,
       shouldLoading: params.shouldLoading === undefined ? true : params.shouldLoading,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      }
+      headers: header
     })
   },
 

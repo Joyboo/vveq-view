@@ -10,8 +10,7 @@ import './assets/css/display.css'
 import './assets/css/font-awesome.min.css'
 
 import store from './store/index'
-import mavonEditor from 'mavon-editor'
-Vue.use(mavonEditor)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

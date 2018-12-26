@@ -11,10 +11,10 @@
       <div style="float: right;">
         <ul v-if="!userInfo.isLogin" class="head-item">
           <li>
-            <a href="javascript:;">首页</a>
+            <router-link to="/">首页</router-link>
           </li>
           <li>
-            <a href="javascript:;">登录</a>
+            <router-link to="/user/login">登录</router-link>
           </li>
           <li>
             <router-link to="/user/signup">注册</router-link>

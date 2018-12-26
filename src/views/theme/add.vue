@@ -32,8 +32,9 @@
               <div class="add-body-title-label">正文</div>
 
               <div>
-                <el-form-item prop="mkvalue">
-                  <mavon-editor :toolbars="toolbars" :subfield="toolbars.issubfield" v-model="themeform.mkvalue"/>
+                <el-form-item prop="content">
+                  <mavon-editor :toolbarsFlag=true :toolbars="toolbars" :subfield="toolbars.issubfield"
+                                v-model="themeform.content"/>
                 </el-form-item>
               </div>
             </div>
@@ -81,9 +82,14 @@
 </template>
 
 <script>
+  import Vue from "vue"
+  import mavonEditor from 'mavon-editor'
   import layoutindex from "../../components/layout/index"
   import 'mavon-editor/dist/css/index.css'
+  import http from "../../util/http.js"
+  import {mapActions, mapState} from 'vuex'
 
+  Vue.use(mavonEditor)
 
   export default {
     name: "add",
@@ -92,16 +98,13 @@
     },
     data() {
       let validateTitle = (rule, value, callback) => {
-        console.log(rule);
-        console.log(value);
-        console.log(callback);
         if (value.trim() === '') {
           this.$message.error("请输入标题");
         } else {
           callback();
         }
       };
-      let validateMkvalue = (rule, value, callback) => {
+      let validateContent = (rule, value, callback) => {
         if (value.trim() === '') {
           this.$message.error("请输入内容");
         } else {
@@ -109,7 +112,6 @@
         }
       };
       let validateCate = (rule, value, callback) => {
-        console.log(rule);
         if (value == '' || value <= 0) {
           this.$message.error("请选择分类");
         } else {
@@ -120,12 +122,12 @@
         themeform: {
           title: "",
           cate: "",
-          mkvalue: "",
+          content: "",
         },
         addrule: {
-          title: [{validator: validateTitle, trigger: 'blur', required: true}],
-          mkvalue: [{validator: validateMkvalue, trigger: 'blur', required: true}],
-          cate: [{validator: validateCate, trigger: 'change', required: true}],
+          title: [{validator: validateTitle, trigger: 'submit', required: true}],
+          content: [{validator: validateContent, trigger: 'submit', required: true}],
+          cate: [{validator: validateCate, trigger: 'submit', required: true}],
         },
         titleAvabledLength: 100,
         toolbars: {
@@ -152,7 +154,7 @@
           undo: true, // 上一步
           redo: true, // 下一步
           trash: true, // 清空
-          save: true, // 保存（触发events中的save事件）
+          save: false, // 保存（触发events中的save事件）
           /* 1.4.2 */
           navigation: true, // 导航目录
           /* 2.1.8 */
@@ -172,8 +174,24 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log("themeform: ", this.themeform);
-            this.$message.success("提交成功了");
+            http.post("/api/theme", {
+              title: this.themeform.title,
+              content: this.themeform.content,
+              cid: parseInt(this.themeform.cate),
+              uid: this.userInfo.id
+            }).then(res => {
+              if (res.data.status == 1) {
+                this.$message.info("发表成功");
+                setTimeout(() => {
+                  // todo 是否需要跳转到此文章
+                  this.$router.push({path: "/index"});
+                }, 1000)
+              } else {
+                this.$message.error("发表失败");
+              }
+            }).catch(err => {
+              console.log("err:", err);
+            })
             return false;
           } else {
             this.$message.error('信息有误, 请检查');
@@ -184,9 +202,14 @@
     },
     watch: {
       // 侦听器，监听title长度
-      'themeform.title' (newValue, oldValue) {
+      'themeform.title'(newValue, oldValue) {
         this.titleAvabledLength = this.themeform.title.length > 100 ? 0 : (100 - this.themeform.title.length)
       }
+    },
+    computed: {
+      ...mapState({
+        userInfo: state => state.userInfo
+      })
     }
   }
 </script>
@@ -213,6 +236,10 @@
 
   #add-body-el .el-input__inner {
     border: none;
+  }
+
+  #add-body-el [type=file] {
+    display: none !important;
   }
 
   .add-body-item {
