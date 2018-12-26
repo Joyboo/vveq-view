@@ -14,7 +14,7 @@
       <!--表单项-->
       <div id="signup-form">
         <el-form :model="signupValue" status-icon :rules="rules2" size="mini" ref="signupValue"
-                 label-width="100px" class="demo-ruleForm">
+                 label-width="80px" class="demo-ruleForm">
           <el-form-item label="用户名" prop="username">
             <el-input type="text" placeholder="请输入用户名" v-model="signupValue.username"
                       autocomplete="off"></el-input>
@@ -49,66 +49,22 @@
     </template>
 
     <template slot="layoutright">
-      <div id="other-login" class="right-body">
-        <div class="right-title">
-          <i class="fa fa-user-circle"></i>
-          第三方登录
-        </div>
-
-        <div class="item">
-                <span>
-                  <el-tooltip class="item" effect="dark" content="Github登录" placement="top">
-                    <i class="fa fa-github"></i>
-                  </el-tooltip>
-                </span>
-          <span>
-                  <el-tooltip class="item" effect="dark" content="QQ登录" placement="top">
-                    <i class="fa fa-qq"></i>
-                  </el-tooltip>
-                </span>
-          <span>
-                  <el-tooltip class="item" effect="dark" content="微信登录" placement="top">
-                    <i class="fa fa-weixin"></i>
-                  </el-tooltip>
-                </span>
-          <span>
-                  <el-tooltip class="item" effect="dark" content="微博登录" placement="top">
-                    <i class="fa fa-weibo"></i>
-                  </el-tooltip>
-                </span>
-        </div>
-      </div>
-
-      <div id="right-login" class="right-body">
-        <div class="right-title">
-          <i class="fa fa-calendar"></i>
-          已有账号了？
-        </div>
-
-        <div class="item">
-          <ul>
-            <li>
-              <a href="javascript:;">登录</a>
-            </li>
-            <li>
-              <a href="javascript:;">忘记密码</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <userright></userright>
     </template>
   </layoutindex>
 </template>
 
 <script>
   import layoutindex from "../../components/layout/index"
+  import userright from "../../components/user/right"
   import http from "../../util/http.js"
   import {mapActions, mapState} from 'vuex'
 
   export default {
     name: "signup",
     components: {
-      layoutindex
+      layoutindex,
+      userright
     },
     // route离开事件
     /* beforeRouteLeave(to, from, next) {
@@ -315,27 +271,6 @@
     cursor: pointer;
   }
 
-  #other-login > div:nth-child(2) {
-    clear: both;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    font-size: 16px;
-  }
-
-  #other-login > div:nth-child(2) span {
-    color: #409EFF;
-    font-size: 25px;
-    margin: 0 15px;
-    width: 12%;
-  }
-
-  #other-login > div:nth-child(2) a:hover {
-    cursor: pointer;
-    color: #556;
-  }
-
   #right-login a:hover {
     text-decoration: underline;
   }
@@ -346,7 +281,7 @@
     #signup-form {
       background-color: #FFF;
       text-align: center;
-      padding: 10px;
+      padding: 20px;
     }
 
     #signup-form .el-form {

@@ -22,6 +22,12 @@ export default new Router({
         require(['../views/user/signup.vue'], resolve);
       }
     }, {
+      // 用户登录
+      path: '/user/login',
+      component(resolve) {
+        require(['../views/user/login.vue'], resolve);
+      }
+    }, {
       // 发表主题
       path: '/theme/add',
       component(resolve) {

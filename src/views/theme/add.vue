@@ -181,7 +181,7 @@
               uid: this.userInfo.id
             }).then(res => {
               if (res.data.status == 1) {
-                this.$message.info("发表成功");
+                this.$message.success("发表成功");
                 setTimeout(() => {
                   // todo 是否需要跳转到此文章
                   this.$router.push({path: "/index"});
