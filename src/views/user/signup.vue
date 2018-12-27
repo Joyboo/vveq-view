@@ -139,7 +139,7 @@
       /*验证码校验*/
       /* // base64验证码出于安全性的考虑，验证成功一次之后就会失效，所以表单自动校验规则暂不开启验证码校验，让API去校验
       let checkVerifyCode = (rule, value, callback) => {
-        http.post('/api/verify/verifyCaptcha', this.verifyForm)
+        http.post('/api/verify', this.verifyForm)
           .then(res => {
             if (res.data.status == 1) {
               callback()
@@ -182,10 +182,12 @@
                   this.$message.error('验证码错误');
                   this.generateCaptcha();
                 } else if (res.data.status == 1) {
+                  this.$message.success('注册成功');
                   res.data.data.isLogin = true;
                   this.updateUserAction(res.data.data);
                   this.$router.push({path: "/index"});
                 } else {
+                  this.generateCaptcha();
                   this.$message.error('网络错误, 请重试');
                 }
               })
@@ -203,11 +205,11 @@
       },
       // 获取验证码
       generateCaptcha() {
-        http.post("/api/verify/getCaptcha", this.verifyForm)
+        http.get("/api/verify", this.verifyForm)
           .then(res => {
             if (res.data.status == 1) {
-              this.verifyForm.Id = res.data.captchaId;
-              this.veridySrc = res.data.data;
+              this.verifyForm.Id = res.data.data.captchaId;
+              this.veridySrc = res.data.data.base64png;
             } else {
               console.log("data error: ", res);
               this.$message.error('网络错误, 请重试');

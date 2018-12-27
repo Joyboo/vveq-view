@@ -43,8 +43,9 @@
               <div>
                 <el-form-item label="选择分类" prop="cate">
                   <el-select v-model="themeform.cate" placeholder="请选择分类">
-                    <el-option label="分类一" value="1"></el-option>
-                    <el-option label="分类二" value="2"></el-option>
+                    <div v-for="(values, k) in cate" :key="k">
+                      <el-option :label="values.name" :value="values.id"></el-option>
+                    </div>
                   </el-select>
                 </el-form-item>
               </div>
@@ -87,7 +88,7 @@
   import layoutindex from "../../components/layout/index"
   import 'mavon-editor/dist/css/index.css'
   import http from "../../util/http.js"
-  import {mapActions, mapState} from 'vuex'
+  import {mapState} from 'vuex'
 
   Vue.use(mavonEditor)
 
@@ -119,6 +120,7 @@
         }
       };
       return {
+        cate: {},
         themeform: {
           title: "",
           cate: "",
@@ -209,6 +211,15 @@
     computed: {
       ...mapState({
         userInfo: state => state.userInfo
+      })
+    },
+    mounted() {
+      http.get("/api/cate").then(res => {
+        if (res.data.status == 1) {
+          this.cate = res.data.data;
+        } else {
+          this.$message.error("网络错误");
+        }
       })
     }
   }

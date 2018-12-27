@@ -91,17 +91,8 @@
     },
     data() {
       return {
-        catedata: {
-          1: "技术",
-          2: "源码展示",
-          3: "分享",
-          4: "心情"
-        },
-        tagsdata: {
-          1: "置顶",
-          2: "独家",
-          3: "首发"
-        },
+        catedata: {},
+        tagsdata: {},
         itemdata: {
           0: {
             authorimg: "http://images.boblog.com/msyql.jpg",
@@ -135,11 +126,23 @@
       }
     },
     mounted() {
-      http.get("/api/common")
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {})
+      // 分类
+      http.get("/api/cate", {type: 2}).then(res => {
+        if (res.data.status == 1) {
+          this.catedata = res.data.data
+        } else {
+          this.$message.error("网络错误，请重试")
+        }
+      })
+      // 标签
+      http.get("/api/tag", {type: 2}).then(res => {
+        if (res.data.status == 1) {
+          this.tagsdata = res.data.data
+        } else {
+          this.$message.error("网络错误，请重试")
+        }
+      })
+      // 主题
     }
   }
 </script>
