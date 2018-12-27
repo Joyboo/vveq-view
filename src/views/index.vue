@@ -8,11 +8,11 @@
         <div class="blog-item-head">
           <span class="blog-cate blo-cate-active">全部</span>
           <span class="blog-cate">最新</span>
-          <span class="blog-cate" v-for="(nv, nk) of nodedata" :key="nk">{{nv}}</span>
+          <span class="blog-cate" v-for="(nv, nk) in catedata" :key="nk">{{nv}}</span>
         </div>
 
         <!--帖子父级div-->
-        <div class="blog-item" v-for="(value, k) of itemdata" :key="k">
+        <div class="blog-item" v-for="(value, k) in itemdata" :key="k">
           <table cellpadding="0" cellspacing="0" border="0" width="100%">
             <tbody>
             <tr>
@@ -36,7 +36,7 @@
                               <span v-if="!(value.tagid == 0)">
                                 <span class="item-tags" v-text="getTagName(value.tagid)"></span> &nbsp;•&nbsp;
                               </span>
-                    <a class="item-node" href="javascript:;" v-text="getItemNodeName(value.nodeid)"></a> &nbsp;•&nbsp;
+                    <a class="item-cate" href="javascript:;" v-text="getItemCateName(value.cid)"></a> &nbsp;•&nbsp;
                     <b><a class="item-author" href="javascript:;">{{value.name}}</a></b> &nbsp;•&nbsp;
                     <span>{{value.updateTime}}</span>
                   </div>
@@ -80,6 +80,7 @@
   import layoutindex from "../components/layout/index"
   import right from "../components/index/right"
   import backtop from "../components/backTop"
+  import http from "../util/http.js"
 
   export default {
     name: "index",
@@ -90,11 +91,7 @@
     },
     data() {
       return {
-        input4: '',
-        input5: '',
-        input9: '',
-
-        nodedata: {
+        catedata: {
           1: "技术",
           2: "源码展示",
           3: "分享",
@@ -110,7 +107,7 @@
             authorimg: "http://images.boblog.com/msyql.jpg",
             title: "golang是世界上最好的语言",
             tagid: 1,
-            nodeid: 1,
+            cid: 1,
             name: "Joyboo",
             updateTime: "2018-12-02 18:03",
             commentNum: 16
@@ -119,82 +116,10 @@
             authorimg: "http://images.boblog.com/msyql.jpg",
             title: "golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言",
             tagid: 0,
-            nodeid: 3,
+            cid: 3,
             name: "Joyboo",
             updateTime: "2018-12-02 18:03",
             commentNum: 1700
-          },
-          2: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 3,
-            nodeid: 2,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 0
-          },
-          3: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 0,
-            nodeid: 1,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 16
-          },
-          4: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 0,
-            nodeid: 1,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 16
-          },
-          5: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 0,
-            nodeid: 1,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 16
-          },
-          6: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 0,
-            nodeid: 1,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 16
-          },
-          7: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 0,
-            nodeid: 1,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 16
-          },
-          8: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 0,
-            nodeid: 1,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 16
-          },
-          9: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 0,
-            nodeid: 1,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 16
           }
         }
       }
@@ -204,13 +129,17 @@
         let tagname = this.tagsdata[tagid];
         return typeof (tagname) == 'undefined' ? "" : tagname;
       },
-      getItemNodeName(nodeid) {
-        let nodename = this.nodedata[nodeid];
-        return typeof (nodename) == 'undefined' ? "" : nodename;
+      getItemCateName(cid) {
+        let catename = this.catedata[cid];
+        return typeof (catename) == 'undefined' ? "" : catename;
       }
     },
     mounted() {
-      // todo 获取主页信息
+      http.get("/api/common")
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {})
     }
   }
 </script>
@@ -266,7 +195,7 @@
   }
 
   /*文章节点*/
-  .item-node {
+  .item-cate {
     background-color: #f5f5f5;
     font-size: 8px;
     /*transform: scale(0.5);*/
@@ -280,7 +209,7 @@
     color: #999;
   }
 
-  .item-node:hover {
+  .item-cate:hover {
     background-color: #ccc;
   }
 

@@ -48,6 +48,10 @@
             <router-link to="/">设置</router-link>
           </li>
           <li>
+            <!--todo 因为现在还没有后台，暂时在这里模拟，后期删除-->
+            <router-link to="/admin">管理</router-link>
+          </li>
+          <li>
             <span @click="m_search_click" class="hidden-md-and-up login-search-icon">
               <i :class="m_searchicon"></i>
             </span>
