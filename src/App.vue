@@ -96,4 +96,12 @@
     padding-left: 10px;
   }
 
+  /*导航面包屑*/
+  .guide {
+    height: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+    background: #fff;
+  }
+
 </style>

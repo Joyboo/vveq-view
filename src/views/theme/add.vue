@@ -231,12 +231,6 @@
     border-radius: 3px;
   }
 
-  .guide {
-    height: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #eaeaea;
-  }
-
   #add-body-el {
     /*padding: 10px;*/
   }

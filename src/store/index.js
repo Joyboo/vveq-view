@@ -5,7 +5,9 @@ Vue.use(Vuex);
 
 const state = {
   // 用户详情
-  userInfo: JSON.parse(window.localStorage.getItem("userInfo") || '{"isLogin":false}')
+  userInfo: JSON.parse(window.localStorage.getItem("userInfo") || '{"isLogin":false}'),
+  // 默认头像
+  defaultAvatar: "/static/default.jpg"
 };
 
 const mutations = {

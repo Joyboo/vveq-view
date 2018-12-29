@@ -19,7 +19,7 @@
               <!--头像td-->
               <td width="48" valign="top" align="center">
                 <a href="javascript:;">
-                  <img :src="value.authorimg" class="avatar" width="48px" height="48">
+                  <img :src="value.avatar ? value.avatar : '/static/default.jpg'" class="avatar" width="48px" height="48">
                 </a>
               </td>
 
@@ -29,7 +29,8 @@
                 <div style="min-height: 50px;">
                   <!--标题-->
                   <div class="item-title">
-                    <a href="javascript:;">{{value.title}}</a>
+                    <router-link :to="'/theme/' + value.id">
+                      {{value.title}}</router-link>
                   </div>
                   <!--节点和发布者，标签, 发布时间 todo 换成XX天小时前这种格式-->
                   <div class="item-other">
@@ -37,8 +38,8 @@
                                 <span class="item-tags" v-text="getTagName(value.tagid)"></span> &nbsp;•&nbsp;
                               </span>
                     <a class="item-cate" href="javascript:;" v-text="getItemCateName(value.cid)"></a> &nbsp;•&nbsp;
-                    <b><a class="item-author" href="javascript:;">{{value.name}}</a></b> &nbsp;•&nbsp;
-                    <span>{{value.updateTime}}</span>
+                    <b><a class="item-author" href="javascript:;">{{value.nickname ? value.nickname : value.username}}</a></b> &nbsp;•&nbsp;
+                    <span>{{value.instime}}</span>
                   </div>
                 </div>
               </td>
@@ -93,26 +94,7 @@
       return {
         catedata: {},
         tagsdata: {},
-        itemdata: {
-          0: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言",
-            tagid: 1,
-            cid: 1,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 16
-          },
-          1: {
-            authorimg: "http://images.boblog.com/msyql.jpg",
-            title: "golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言golang是世界上最好的语言",
-            tagid: 0,
-            cid: 3,
-            name: "Joyboo",
-            updateTime: "2018-12-02 18:03",
-            commentNum: 1700
-          }
-        }
+        itemdata: {}
       }
     },
     methods: {
@@ -143,6 +125,13 @@
         }
       })
       // 主题
+      http.get("/api/theme/getIndexTheme/0").then(res => {
+        if (res.data.status == 1) {
+          this.itemdata = res.data.data
+        } else {
+          this.$message.error("网络错误，请重试")
+        }
+      })
     }
   }
 </script>

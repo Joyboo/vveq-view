@@ -34,10 +34,22 @@ export default new Router({
         require(['../views/theme/add.vue'], resolve);
       }
     },{
+      // 主题详情页
+      path: '/theme/:id',
+      component(resolve) {
+        require(['../views/theme/index.vue'], resolve);
+      }
+    },{
       // 管理页，现在没有后台，暂时在这里进行模拟，后期删除
       path: '/admin',
       component(resolve) {
         require(['../views/admin.vue'], resolve);
+      }
+    },{
+      // 分类详情页
+      path: '/cate/:id',
+      component(resolve) {
+        require(['../views/cate/index.vue'], resolve);
       }
     }
   ]

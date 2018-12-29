@@ -235,14 +235,6 @@
 
 <style scoped>
 
-  /*面包屑导航*/
-  #index-body .guide {
-    background: #FFF;
-    height: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #eaeaea;
-  }
-
   #signup-form {
     background-color: #FFF;
     text-align: center;
