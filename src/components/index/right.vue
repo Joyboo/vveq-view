@@ -10,12 +10,12 @@
       </div>
       <!--头像+昵称-->
       <div>
-        <div style="float:left;width: 50px;height:50px;padding: 5px">
+        <div class="right-avatar-img">
           <a href="javascript:;">
-            <img :src="userInfo.avatar != '' ? userInfo.avatar : '/static/default.jpg'" alt="">
+            <img :src="userInfo.avatar ? userInfo.avatar : defaultAvatar" alt="">
           </a>
         </div>
-        <div style="width:60%;line-height:60px;overflow: hidden;padding: 0 10px;text-align: left;">
+        <div class="right-avatar-username">
           <a href="javascripit:;">
             {{userInfo.username}}
           </a>
@@ -216,12 +216,9 @@
       ...mapActions(['updateUserAction']),
     },
     computed: {
-      // 如果没设置头像，显示默认的头像
-      avatar () {
-        return this.userInfo.avatar ? this.userInfo.avatar : ""
-      },
       ...mapState({
         userInfo: state => state.userInfo,
+        defaultAvatar: state => state.defaultAvatar
       })
     }
   }
@@ -356,6 +353,21 @@
 
   #right-container .el-input {
     margin: 10px 0;
+  }
+
+  .right-avatar-img {
+    float: left;
+    width: 50px;
+    height: 50px;
+    padding: 5px
+  }
+
+  .right-avatar-username {
+    width: 60%;
+    line-height: 60px;
+    overflow: hidden;
+    padding: 0 10px;
+    text-align: left;
   }
 
   /* 移动端 */

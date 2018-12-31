@@ -27,6 +27,9 @@
         </ul>
         <ul v-else class="head-item">
           <li>
+            <router-link to="/">首页</router-link>
+          </li>
+          <li>
             <!--动态，收藏，点赞，积分-->
             <el-dropdown @command="handleCommand" trigger="click">
               <span class="el-dropdown-link">

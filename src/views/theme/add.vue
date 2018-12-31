@@ -29,11 +29,14 @@
             </div>
 
             <div class="add-body-item">
-              <div class="add-body-title-label">正文</div>
+              <div class="add-body-title-label">
+                <span>正文</span>
+                <span class="title-length">{{contentLength}}</span>
+              </div>
 
               <div>
                 <el-form-item prop="content">
-                  <mavon-editor :toolbarsFlag=true :toolbars="toolbars" :subfield="toolbars.issubfield" v-model="themeform.content"/>
+                  <mavon-editor :toolbarsFlag=true :toolbars="toolbars" :subfield="toolbars.issubfield" @change="contentChange" v-model="themeform.content"/>
                 </el-form-item>
               </div>
             </div>
@@ -131,6 +134,7 @@
           cate: [{validator: validateCate, trigger: 'submit', required: true}],
         },
         titleAvabledLength: 100,
+        contentLength:0,
         toolbars: {
           bold: true, // 粗体
           italic: true, // 斜体
@@ -199,6 +203,9 @@
             return false;
           }
         });
+      },
+      contentChange(value, rander) {
+        this.contentLength = value.length;
       }
     },
     watch: {

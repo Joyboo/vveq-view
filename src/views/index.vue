@@ -19,7 +19,7 @@
               <!--头像td-->
               <td width="48" valign="top" align="center">
                 <a href="javascript:;">
-                  <img :src="value.avatar ? value.avatar : '/static/default.jpg'" class="avatar" width="48px" height="48">
+                  <img :src="value.avatar ? value.avatar : defaultAvatar" class="avatar" width="48px" height="48">
                 </a>
               </td>
 
@@ -81,6 +81,7 @@
   import layoutindex from "../components/layout/index"
   import right from "../components/index/right"
   import backtop from "../components/backTop"
+  import {mapActions, mapState} from 'vuex'
   import http from "../util/http.js"
 
   export default {
@@ -106,6 +107,11 @@
         let catename = this.catedata[cid];
         return typeof (catename) == 'undefined' ? "" : catename;
       }
+    },
+    computed: {
+      ...mapState({
+        defaultAvatar: state => state.defaultAvatar
+      })
     },
     mounted() {
       // 分类
