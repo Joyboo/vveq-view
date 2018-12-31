@@ -51,6 +51,12 @@ export default new Router({
       component(resolve) {
         require(['../views/cate/index.vue'], resolve);
       }
+    },{
+      // 用户详情页
+      path: '/user/:id',
+      component(resolve) {
+        require(['../views/user/index.vue'], resolve);
+      }
     }
   ]
 })

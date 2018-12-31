@@ -33,8 +33,7 @@
 
               <div>
                 <el-form-item prop="content">
-                  <mavon-editor :toolbarsFlag=true :toolbars="toolbars" :subfield="toolbars.issubfield"
-                                v-model="themeform.content"/>
+                  <mavon-editor :toolbarsFlag=true :toolbars="toolbars" :subfield="toolbars.issubfield" v-model="themeform.content"/>
                 </el-form-item>
               </div>
             </div>
@@ -158,7 +157,7 @@
           trash: true, // 清空
           save: false, // 保存（触发events中的save事件）
           /* 1.4.2 */
-          navigation: true, // 导航目录
+          navigation: false, // 导航目录
           /* 2.1.8 */
           alignleft: true, // 左对齐
           aligncenter: true, // 居中
