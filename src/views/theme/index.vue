@@ -8,7 +8,6 @@
         <div class="guide">
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <!--todo 点击跳转到分类-->
             <el-breadcrumb-item :to="'/cate/' + themedata.cate.id">{{themedata.cate.name}}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -37,6 +36,55 @@
             <mavon-editor :toolbarsFlag="editprops.toolbarsFlag" :subfield="editprops.subfield"
                           :defaultOpen="editprops.defaultOpen"
                           v-model="themedata.content"/>
+
+            <!--回复-->
+            <div class="blog-item" v-for="(value, k) in themedata.comments" :key="k">
+              <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                <tr>
+                  <!--头像td-->
+                  <td width="48" valign="top" align="center">
+                    <a href="javascript:;">
+                      <img :src="value.user.avatar ? value.user.avatar : defaultAvatar" class="avatar" width="48px"
+                           height="48">
+                    </a>
+                  </td>
+
+                  <td width="10"></td>
+                  <!--帖子td-->
+                  <td width="auto">
+                    <div style="min-height: 50px;">
+                      <!--节点和发布者，标签, 发布时间-->
+                      <div class="item-other">
+                        <b>
+                          <a class="item-author" href="javascript:;">
+                            {{value.user.nickname ? value.user.nickname : value.user.username}}
+                          </a>
+                        </b> &nbsp;•&nbsp;
+                        <span>{{value.instime}}</span>
+                      </div>
+
+                      <div class="item-content">
+                        content
+                      </div>
+                    </div>
+                  </td>
+
+                  <!--数量提示-->
+                  <td width="50" align="center">
+                    <el-button size="mini"
+                               :type="commentLikeIcon(k) ? 'default' : 'primary'"
+                               :icon="commentLikeIcon(k) ? 'fa fa-thumbs-o-up' : 'fa fa-thumbs-up'"
+                               @click="like(k)" round>&nbsp;{{value.likes.length}}
+                    </el-button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!--发表回复-->
+            <div style="height:200px;border: 1px solid red;"></div>
           </div>
         </div>
 
@@ -83,6 +131,7 @@
     },
     data() {
       return {
+        likeinfo: {},
         themedata: {
           /*模拟数据*/
           id: 1,
@@ -102,32 +151,66 @@
           instime: "2018-12-12 12:00:00",
           title: "golang是最好的语言",
           content: "",
-          comments: [
-            {
-              users: {
+          comments: {
+            2: {
+              user: {
                 username: "Joyboo",
                 nickname: "zhoubo",
                 avatar: "",
               },
-              content: "信不信随手一敲就是完美的十五字",
-              like: 3,
+              likes: [1, 2, 3],
+              content: "信不信随手一敲就是完美的十五字1",
               instime: "2018-12-12 12:05:00"
             },
-            {
-              users: {
+            1: {
+              user: {
                 username: "Joyboo",
                 nickname: "zhoubo",
                 avatar: "",
               },
-              content: "信不信随手一敲就是完美的十五字",
-              like: 3,
+              likes: [2, 3],
+              content: "信不信随手一敲就是完美的十五字2",
               instime: "2018-12-12 12:05:36"
             }
-          ]
+          }
         }
       }
     },
-    methods: {},
+    methods: {
+      // 评论点赞按钮
+      like(comentid) {
+        // 未登录
+        if (this.userInfo.isLogin == false) {
+          return this.open2();
+        }
+
+        let index = this.themedata.comments[comentid].likes.indexOf(this.userInfo.id);
+        if (index == -1) {
+          // 点赞
+          this.themedata.comments[comentid].likes.push(this.userInfo.id);
+        } else {
+          // 取消
+          this.themedata.comments[comentid].likes.splice(index, 1);
+        }
+        // todo 发送api请求
+      },
+      // 用户是否点赞了此评论
+      commentLikeIcon(comentid) {
+        let comment = this.themedata.comments[comentid];
+        return comment.likes.indexOf(this.userInfo.id) == -1;
+      },
+      // 确认操作弹窗
+      open2() {
+        this.$confirm('此操作需要登录', '提示', {
+          confirmButtonText: '现在登录',
+          cancelButtonText: '继续逛逛',
+          type: 'info'
+        }).then(() => {
+          this.$router.push({path: "/user/login"});
+        }).catch(() => {
+        });
+      }
+    },
     computed: {
       editprops() {
         return {
@@ -188,6 +271,30 @@
   .theme-head {
     border-bottom: 1px solid #e2e2e2;
     padding: 10px;
+  }
+
+  .blog-item {
+    width: auto;
+    min-height: 50px;
+    margin: 0;
+    padding: 5px;
+    line-height: 100%;
+    border-top: 1px solid #e2e2e2;
+  }
+
+  .blog-item:hover {
+    box-shadow: inset 0 1px 5px rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
+  }
+
+  .item-other {
+    font-size: 10px;
+    color: #ccc;
+  }
+
+  /*鼠标移入时增加下划线*/
+  .item-author:hover {
+    text-decoration: underline;
+    cursor: pointer;
   }
 
 </style>
