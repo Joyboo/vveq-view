@@ -131,7 +131,6 @@
     },
     data() {
       return {
-        likeinfo: {},
         themedata: {
           /*模拟数据*/
           id: 1,
@@ -192,7 +191,7 @@
           // 取消
           this.themedata.comments[comentid].likes.splice(index, 1);
         }
-        // todo 发送api请求
+        http.post("/api/like", {type:1, uid:this.userInfo.id, pid:parseInt(comentid)})
       },
       // 用户是否点赞了此评论
       commentLikeIcon(comentid) {
