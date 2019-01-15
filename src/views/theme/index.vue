@@ -33,7 +33,8 @@
 
           <div>
 
-            <mavon-editor :toolbarsFlag="editprops.toolbarsFlag" :subfield="editprops.subfield"
+            <mavon-editor style="border-bottom: 1px solid #e2e2e2;" :toolbarsFlag="editprops.toolbarsFlag"
+                          :subfield="editprops.subfield"
                           :defaultOpen="editprops.defaultOpen"
                           v-model="themedata.content"/>
 
@@ -65,14 +66,14 @@
                       </div>
 
                       <div class="item-content">
-                        content
+                        {{value.content}}
                       </div>
                     </div>
                   </td>
 
-                  <!--数量提示-->
+                  <!--点赞-->
                   <td width="50" align="center">
-                    <el-button size="mini"
+                    <el-button class="zan" size="mini"
                                :type="commentLikeIcon(k) ? 'default' : 'primary'"
                                :icon="commentLikeIcon(k) ? 'fa fa-thumbs-o-up' : 'fa fa-thumbs-up'"
                                @click="like(k)" round>&nbsp;{{value.likes.length}}
@@ -84,7 +85,18 @@
             </div>
 
             <!--发表回复-->
-            <div style="height:200px;border: 1px solid red;"></div>
+            <div style="padding: 10px;">
+              <el-form :model="submitComment" status-icon size="mini" ref="submitComment"
+                       class="demo-ruleForm">
+                <el-input type="textarea" :rows="5" placeholder="回复。。"
+                          v-model="submitComment.comment">
+                </el-input>
+
+                <div style="margin-top: 10px;">
+                  <el-button  size="mini" type="primary" @click="submitForm('submitComment')">提交</el-button>
+                </div>
+              </el-form>
+            </div>
           </div>
         </div>
 
@@ -131,6 +143,10 @@
     },
     data() {
       return {
+        likeinfo: {},
+        submitComment: {
+          comment: ""
+        },
         themedata: {
           /*模拟数据*/
           id: 1,
@@ -151,7 +167,7 @@
           title: "golang是最好的语言",
           content: "",
           comments: {
-            2: {
+            1: {
               user: {
                 username: "Joyboo",
                 nickname: "zhoubo",
@@ -161,14 +177,14 @@
               content: "信不信随手一敲就是完美的十五字1",
               instime: "2018-12-12 12:05:00"
             },
-            1: {
+            2: {
               user: {
                 username: "Joyboo",
                 nickname: "zhoubo",
                 avatar: "",
               },
               likes: [2, 3],
-              content: "信不信随手一敲就是完美的十五字2",
+              content: "信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字信不信随手一敲就是完美的十五字",
               instime: "2018-12-12 12:05:36"
             }
           }
@@ -191,7 +207,7 @@
           // 取消
           this.themedata.comments[comentid].likes.splice(index, 1);
         }
-        http.post("/api/like", {type:1, uid:this.userInfo.id, pid:parseInt(comentid)})
+        // todo 发送api请求
       },
       // 用户是否点赞了此评论
       commentLikeIcon(comentid) {
@@ -208,7 +224,33 @@
           this.$router.push({path: "/user/login"});
         }).catch(() => {
         });
-      }
+      },
+      /**
+       * 提交回复
+       * @param formName
+       */
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid && this.submitComment.comment != '') {
+            this.themedata.comments[5] = {
+              user: {
+                username: "Joyboo",
+                nickname: "zhoubo",
+                avatar: "",
+              },
+              likes: [],
+              content: this.submitComment.comment,
+              instime: "2018-12-12 12:05:36"
+            };
+            this.submitComment.comment = '';
+            this.$message.success("发表成功");
+          }
+          return false;
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      },
     },
     computed: {
       editprops() {
@@ -229,8 +271,8 @@
       let tid = this.$route.params.id;
       http.get("/api/theme/" + tid).then(res => {
         if (res.data.status == 1) {
-          this.themedata.content = res.data.data;
-          console.log("content: ", this.themedata.content);
+          // todo 整理接口数据结构
+          this.themedata.content = res.data.data.content;
         } else {
           this.$message.error("网络错误，请重试")
         }
@@ -278,7 +320,7 @@
     margin: 0;
     padding: 5px;
     line-height: 100%;
-    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
   }
 
   .blog-item:hover {
@@ -294,6 +336,11 @@
   .item-author:hover {
     text-decoration: underline;
     cursor: pointer;
+  }
+
+  .item-content {
+    padding: 5px;
+    font-size: 10px;
   }
 
 </style>
