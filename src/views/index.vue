@@ -59,7 +59,7 @@
 
       <!--分页-->
       <div id="body-pages">
-        <el-pagination background layout="prev, pager, next" :total="80">
+        <el-pagination background layout="prev, pager, next" :total="total">
         </el-pagination>
       </div>
     </template>
@@ -95,7 +95,8 @@
       return {
         catedata: {},
         tagsdata: {},
-        itemdata: {}
+        itemdata: {},
+        total: 0 // 主题数
       }
     },
     methods: {
@@ -133,7 +134,8 @@
       // 主题
       http.get("/api/theme/getIndexTheme/0").then(res => {
         if (res.data.status == 1) {
-          this.itemdata = res.data.data
+          this.itemdata = res.data.data;
+          this.total = this.itemdata.length;
         } else {
           this.$message.error("网络错误，请重试")
         }

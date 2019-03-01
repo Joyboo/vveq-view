@@ -2,6 +2,8 @@
 
 > 使用Vue+webpack+Element搭建博客平台
 
+> 此项目的api在 [vveq-api](https://github.com/Joyboo/vveq-api)
+
 ## Build Setup
 
 ``` bash
