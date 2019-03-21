@@ -1,4 +1,4 @@
-# blog-view
+# vveq-view
 
 > 使用Vue+webpack+Element搭建博客平台
 
