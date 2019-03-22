@@ -220,6 +220,12 @@
       })
     },
     mounted() {
+      // 检测登录状态
+      if (!this.userInfo.isLogin)
+      {
+        this.$message.error("请登录");
+        this.$router.push({path: "/index"});
+      }
       http.get("/api/cate").then(res => {
         if (res.data.status == 1) {
           this.cate = res.data.data;
